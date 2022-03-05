@@ -8,6 +8,12 @@
     git push -u origin <branch>
 
 
+เมื่อ อัพเดท ไฟล์
+1.เลือก branch
+2.git add .
+3.git commit -am "make it better"
+4.git push origin main
+
 
 เกี่ยวกับ github
 
