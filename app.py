@@ -82,6 +82,6 @@ def test_signals():
         return "i'm Yam"
 
     else:
-        return "ROBOT is develop by Mr.Harith only one \n My name is harith"
+        return "ROBOT is good"
 
 
