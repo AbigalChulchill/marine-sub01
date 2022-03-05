@@ -59,29 +59,29 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
 
 
 
-# @app.route("/", methods=['GET','POST'])
-# def test_signals():
+@app.route("/", methods=['GET','POST'])
+def test_signals():
     
-#     if request.method == "POST":
-#         msg = request.data.decode("utf-8")
+    if request.method == "POST":
+        msg = request.data.decode("utf-8")
 
-#         """
-#         PYBOTT : EASY EMA: order
-#         {{strategy.order.action}}
-#         @ {{strategy.order.contracts}}
-#         filled on {{ticker}}.
-#         New strategy position is
-#         {{strategy.position_size}}
-#         """
-#         #สรุปว่า BTCUSDT ขาย
-#         #if symbol , signals
-#             #PlaceSELL
-#         #else
-#             #PlaceBUY
+        """
+        PYBOTT : EASY EMA: order
+        {{strategy.order.action}}
+        @ {{strategy.order.contracts}}
+        filled on {{ticker}}.
+        New strategy position is
+        {{strategy.position_size}}
+        """
+        #สรุปว่า BTCUSDT ขาย
+        #if symbol , signals
+            #PlaceSELL
+        #else
+            #PlaceBUY
         
-#         return "This is buying signals"
+        return "i'm Yam"
 
-#     else:
-#         return "กรุณานำ Link ไปใส่ไว้ที่ Webhook Tradingview"
+    else:
+        return "ROBOT is develop by Mr.Harith only one \n My name is harith"
 
 
