@@ -1,4 +1,4 @@
 import requests
 
 data_base = "/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"+"/"+"0"
-requests.post(url="https://robot-marine.herokuapp.com//ROBOT_STOP"+data_base)
+requests.post(url="https://marine-invest.herokuapp.com//ROBOT_STOP"+data_base)
