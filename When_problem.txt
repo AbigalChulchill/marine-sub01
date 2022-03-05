@@ -1,0 +1,15 @@
+1.เขียน โค๊ต
+2.สร้าง repository ใน github
+3.เปิด terminal พิม
+    git init
+    git add .
+    git commit -m "Add <ชื่อโฟรเดอร์เราในคอม> project to GitHub remote"
+    git remote add origin https://github.com/harith11000/<repository>.git
+    git push -u origin <branch>
+
+
+
+เกี่ยวกับ github
+
+- เมื่อมีปัญหาเกี่ยวกับการ update github
+https://stackoverflow.com/questions/50200597/how-to-update-a-file-placed-in-my-github-repository-using-command-line
