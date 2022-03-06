@@ -33,3 +33,6 @@ git branch -m robot invest  เปลี่ยนชื่อ branch
 git fetch origin
 git branch -u origin/invest invest
 git remote set-head origin -a
+
+delete romote
+git remote rm origin
