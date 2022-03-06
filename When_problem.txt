@@ -36,3 +36,14 @@ git remote set-head origin -a
 
 delete romote
 git remote rm origin
+
+สรุปการ อัพโหลด git hub 2 ตัวคือ
+
+1.เราต้องมีการเปิดใช้  รีโมดก่อนครั้งแรก โดยคำสั่ง git remote set-url <main ชื่อ สามารถเปลี่ยนได้ > --push --add https://github.com/harith11000/marine-invest.git 
+2.เพิ่ม Remote git remote add <bitbucket> <git@bitbucket.org:akexorcist/awesome-android-app.git>
+3.  Pull ข้อมูลล่าสุดจาก Remote ตัวเก่าลงมาไว้ใน Local ให้เรียบร้อยก่อน  git pull origin master
+4.Push ขึ้นไปไว้ใน Remote ตัวใหม่ให้เรียบร้อยซะ git push bitbucket master
+5. git remote set-url origin --push --add <url_of_the_old_remote>
+git remote set-url origin --push --add <url_of_the_new_remote>
+
+ในส่วนที่ 5 จำทำให้เมื่อมีการ add รีโหมดตัวแรก จะไปโผล่ใน remote ตัวที่สองด้วยและตัวอื่นๆถ้ามีการเพิมขึ้นมา
