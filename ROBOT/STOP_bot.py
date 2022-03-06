@@ -2,7 +2,7 @@ from songline import Sendline
 import emoji
 import sys
 
-def stop(token,text):
+def stop(text,token):
     
     messenger = Sendline(token)
         
