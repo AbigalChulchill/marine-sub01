@@ -29,7 +29,7 @@ https://stackoverflow.com/questions/50200597/how-to-update-a-file-placed-in-my-g
     3.git commit -am "make it better"
     4.git push origin main
 
-git branch -m robot invest
+git branch -m robot invest  เปลี่ยนชื่อ branch
 git fetch origin
 git branch -u origin/invest invest
 git remote set-head origin -a
