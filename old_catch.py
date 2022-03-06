@@ -7,7 +7,6 @@ def app():
     import threading
     import sys
 
-
     # try:
     #     from config import *
     # except:
