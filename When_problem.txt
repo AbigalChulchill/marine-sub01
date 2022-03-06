@@ -19,3 +19,12 @@
 
 - เมื่อมีปัญหาเกี่ยวกับการ update github
 https://stackoverflow.com/questions/50200597/how-to-update-a-file-placed-in-my-github-repository-using-command-line
+
+
+วิธีที่ 2 เช็ค cd ของเครื่องเราว่าเป็น ตำแหน่งของโฟรเดอร์ที่เรา clone มาจาก gidhub หรือไม่ แล้วก็
+    git remote add origin https://github.com/harith11000/<repository>.git
+    git push -u origin <branch>
+    1.เลือก branch
+    2.git add .
+    3.git commit -am "make it better"
+    4.git push origin main
