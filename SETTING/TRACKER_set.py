@@ -62,7 +62,6 @@ print()
 print("==============================")
 print()
 
-
 progress = input("DO YOU WANT TO PROGRESS ROBOT ?  ( Y / N ) ")
 if progress == "y":
 

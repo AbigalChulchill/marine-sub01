@@ -4,6 +4,7 @@ import PySimpleGUI as sg
 from app import SM, SM_t
 import sys
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
