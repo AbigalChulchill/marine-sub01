@@ -15,8 +15,8 @@ class GOTO_ROBOT(threading.Thread):
     def robot_track(self,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20):
         tracker(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20)
 
-    def notifi(self,text,z):
-        stop(text,z)
+    def notifi(self,text,token):
+        stop(text,token)
 
 @app.route("/<ENTER>/<x>/<y>/<z>/<A1>/<A2>/<A3>/<A4>/<A5>/<A6>/<A7>/<A8>/<A9>/<A10>/<A11>/<A12>/<A13>/<A14>/<A15>/<A16>/<A17>/<A18>/<A19>/<A20>/<A21>/<A22>", methods=['POST'])
 def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22):
@@ -81,6 +81,6 @@ def test_signals():
         return "i'm Yam"
 
     else:
-        return "ROBOT is good"
+        return "This is ROBOT MAIN"
 
 
