@@ -39,11 +39,11 @@ git remote rm origin
 
 สรุปการ อัพโหลด git hub 2 ตัวคือ   อ้างอิง https://blog.nextzy.me/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%9A%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99-git-%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2-remote-%E0%B8%AB%E0%B8%A5%E0%B8%B2%E0%B8%A2%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AD%E0%B8%A2%E0%B8%B9%E0%B9%88%E0%B8%A3%E0%B8%AD%E0%B8%94-a953de1c4e75
 
-1.เราต้องมีการเปิดใช้  รีโมดก่อนครั้งแรก โดยคำสั่ง git remote add origin https://github.com/harith11000/<repository>.git
-2.เพิ่ม Remote git remote add sub01 https://github.com/harith11000/marine-invest.git
-3.  Pull ข้อมูลล่าสุดจาก Remote ตัวเก่าลงมาไว้ใน Local ให้เรียบร้อยก่อน  git pull origin master
-4.Push ขึ้นไปไว้ใน Remote ตัวใหม่ให้เรียบร้อยซะ git push bitbucket master
-5. git remote set-url origin --push --add <url_of_the_old_remote>
-git remote set-url origin --push --add <url_of_the_new_remote>
+1.เราต้องมีการเปิดใช้  รีโมดก่อนครั้งแรก โดยคำสั่ง git remote add origin https://github.com/harith11000/marine-invest.git
+2.เพิ่ม Remote git remote add sub https://github.com/harith11000/marine-invest.git
+3.  Pull ข้อมูลล่าสุดจาก Remote ตัวเก่าลงมาไว้ใน Local ให้เรียบร้อยก่อน  git pull main robot
+4.Push ขึ้นไปไว้ใน Remote ตัวใหม่ให้เรียบร้อยซะ git push sub robot
+5. git remote set-url main --push --add https://github.com/harith11000/marine-invest.git
+git remote set-url main --push --add https://github.com/harith11000/marine-sub01.git
 
 ในส่วนที่ 5 จำทำให้เมื่อมีการ add รีโหมดตัวแรก จะไปโผล่ใน remote ตัวที่สองด้วยและตัวอื่นๆถ้ามีการเพิมขึ้นมา
