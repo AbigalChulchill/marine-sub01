@@ -27,7 +27,8 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
         z2 = 100 - int(zone_2)
         z3 = 100 - int(zone_3)
         z4 = 100 - int(zone_4)
-      
+
+        messenger = Sendline(token)
         messenger.sendtext(
             '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Review RB_Ratio(d)'+
    
@@ -161,7 +162,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
             elif os == 2:
                 line.append('Status     =    System_Test')
                 
-            
+            messenger = Sendline(token)
             messenger.sendtext(
 
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Balance Ratio(d)'+
