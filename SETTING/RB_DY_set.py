@@ -1,5 +1,5 @@
 import requests
-
+import variable
 
 def sumary():
 
@@ -119,7 +119,7 @@ progress = str(input("DO YOU WANT TO PROGRESS ROBOT ?  ( Y / N ) "))
 print()
 if progress == "y":
     data_base = "/"+api_key+"/"+api_secret+"/"+token+"/"+begin_money+"/"+status+"/"+asset_RB+"/"+low_gap+"/"+zone_1+"/"+mid_gap+"/"+zone_2+"/"+high_gap+"/"+zone_3+"/"+zone_4+"/"+limit_percent+"/"+EMAx+"/"+emat+"/"+sav+"/"+asset_saving+"/"+savx+"/"+savy+"/"+line+"/"+td+"/"+th+"/"+tm+"/"+ts
-    requests.post(url="https://marine-invest.herokuapp.com//RM_DYNAMIC"+data_base)
+    requests.post(url=variable.domain+"/"+"RM_DYNAMIC"+data_base)
 else :
     print("ROBOT_STOP")
 

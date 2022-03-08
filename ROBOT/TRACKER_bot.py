@@ -7,6 +7,7 @@ import emoji
 from songline import Sendline
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import variable
 
 
 def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3,s1,s2,s3,s4,td,th,tm,ts):
@@ -132,6 +133,7 @@ def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3
       
         messenger.sendtext(
 
+            '\n'+emoji.emojize(":wrench:", use_aliases=True)+"DOMAIN     =    "+str(variable.name_domain)+
             '\n'+emoji.emojize(":wrench:", use_aliases=True)+"SYSTEM     =    "+'ROBOT_TRACKER'+
 
             '\n\n'+str(utc)+ " ---> " +"UTC"+ 

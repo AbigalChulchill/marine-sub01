@@ -3,6 +3,7 @@ from ROBOT.RB_DY_bot import rebalance_dynamic
 from ROBOT.TRACKER_bot import tracker
 from ROBOT.STOP_bot import stop
 import threading
+import variable
 
 app = Flask(__name__)
 
@@ -27,26 +28,26 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
 
     if ENTER == "RM_DYNAMIC":
         
-        print("RM_DYNAMIC")
+        print("(",str(variable.name_domain),")"," ","RM_DYNAMIC")
         RM_DYNAMIC.start()
 
 
     elif ENTER == "TRACKER":
         
-        print("TRACKER")
+        print("(",str(variable.name_domain),")"," ","TRACKER")
         BOT_TRACK.start()
 
 
     elif ENTER == "ROBOT_STOP":
 
         text = "ROBOT_STOP"
-        print(text)
+        print("(",str(variable.name_domain),")"," ",text)
         GR.notifi(text,z)
         
 
     else :
         text = "STOP by error"
-        print(text)
+        print("(",str(variable.name_domain),")"," ",text)
         GR.notifi(text,z)
         
     return "ok"

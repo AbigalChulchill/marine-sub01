@@ -1,4 +1,5 @@
 import requests
+import variable
 
 
 print("===========================")
@@ -66,7 +67,7 @@ progress = input("DO YOU WANT TO PROGRESS ROBOT ?  ( Y / N ) ")
 if progress == "y":
 
     data_base = str("/"+api_key+"/"+api_secret+"/"+token+"/"+asset_TR+"/"+ind_t+"/"+e1+"/"+e2+"/"+e3+"/"+e4+"/"+r+"/"+b1+"/"+b2+"/"+m1+"/"+m2+"/"+m3+"/"+s1+"/"+s2+"/"+s3+"/"+s4+"/"+td+"/"+th+"/"+tm+"/"+ts+"/"+"0"+"/"+"0") 
-    requests.post(url="https://marine-invest.herokuapp.com//TRACKER"+data_base)
+    requests.post(url=variable.domain+"/"+"ROBOT_STOP"+data_base)
 
 else :
     print("ROBOT_STOP")
