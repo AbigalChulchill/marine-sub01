@@ -11,16 +11,23 @@ from dateutil.relativedelta import relativedelta
 from binance import Client
 
 
-def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
+def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
 
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
     saving = Client(api_key,api_secret)
-    messenger = Sendline(token)
 
     countdown = (td * 86400)+ (th * 3600) + (tm * 60) + ts
 
     symbolx = asset_RB+"/"+'USDT' #pair_trade
+
+    if st == "S":
+        status = str(1)
+    elif st == "T":
+        status = str(0)
+    else :
+        status = str(0)
+
 
     def initial():
 
@@ -107,7 +114,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
         # STOP_LO 
         # RUNNING เส้น EMA ไม่อยู่ในเงื่อนไข ขาขึ้น หรือ ขาลง
 
-        if EMAx == "1":
+        if EMAx == "Y":
             print("Signal_Status    > ",ema_signal[0])
 
             if ((status == 1) and (ema_signal[0] != "RUNNING")) :           # Stop action
@@ -121,7 +128,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
 
             signalx = ema_signal[0]                                     # portfolio & line
        
-        elif EMAx == "0":   
+        elif EMAx == "N":   
             print("Signal_Status    > ","--OFF--")
 
             if status == 1:
@@ -339,9 +346,9 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
         
         product = asset_saving +"/"+'001'
 
-        if sav == "y":
+        if sav == "Y":
 
-            if savx == "g":
+            if savx == "G":
                 if growthx > float(savy):           # ฝากทั้งหมดเมื่อจับสัญญานได้
                     try :
                         exchange.purchase_lending_product(productId = product, amount = float(savy))
@@ -350,7 +357,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
                 else :
                     print("-OFF- SAVING Less than value config")
 
-            elif savx == "gp":
+            elif savx == "GP":
                 if growth_perx > float(savy):           # ฝากทั้งหมดเมื่อจับสัญญานได้
                     try :
                         exchange.purchase_lending_product(productId = product, amount = float(savy))
@@ -407,15 +414,16 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
         print(tabulate(info2, headers='keys', tablefmt='fancy_grid'))
 
         # ส่ง line---------------------------------------------------------------------------------
-        if  line == "y" :
+        if  line == "Y" :
 
             if value[0] > 10 :
                 line_notify()    
             else :
                 print("-OFF- LineNotify less than 10")
 
-        elif line == "n" :
+        elif line == "N" :
             print("-OFF- LineNotify Only Real-trade")
+            line_notify()
 
         else :
             print("LineNotify error by",line)

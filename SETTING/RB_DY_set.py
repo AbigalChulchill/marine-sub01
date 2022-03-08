@@ -1,5 +1,5 @@
 import requests
-import variable
+import var_set
 
 def sumary():
 
@@ -36,9 +36,9 @@ print("===========================")
 print()
 begin_money = str(input('Begin_money = '))
 st = str(input('Do you want to START or TEST  ( S / T ) ? '))
-if st == "s":
+if st == "S":
     status = str(1)
-elif st == "t":
+elif st == "T":
     status = str(0)
 else :
     status = str(0)
@@ -70,24 +70,24 @@ E = str(input("Do you want to check EMA  ( Y / N ) ?  "))
 Ex = 0
 EMAx = str(Ex)
 print()
-if E == "y":
-    Ex += 1
+if E == "Y":
+    EMAx = "Y"
     print(">>>>>","1m","3m","5m","15m","30m","1h","2h","4h","6h","8h","12h","1d")
     emat = str(input("Input EMA 10,40,65 TimeFrame = "))
 else:
-    Ex = str(0)
+    EMAx = "N"
     emat = str(0)
 print()
 print("===========================")
 print()
 sav = str(input("Do you want to Auto saving ?  ( Y / N ) "))
 print()
-if sav == "y" :
+if sav == "Y" :
     as_sav = str(input("Mark SYMBOL to Auto-saving = " ))
     asset_saving = str(as_sav.upper())
     savx = str(input("setting Auto saving with value GROWTH or GROWTH% ?  ( G / GP ) "))
     savy = str(input("input value GROWTH or GROWTH% = "   ))
-elif sav == "n" :
+elif sav == "N" :
     asset_saving = str(0)
     savx = str(0)
     savy  = str(0)
@@ -110,16 +110,16 @@ print()
 print("===========================")
 print()
 show = str(input("Do you want to show sumary ?  ( Y / N ) "))
-if show == "y":
+if show == "Y":
     sumary()  
 else :
     pass
 print()
 progress = str(input("DO YOU WANT TO PROGRESS ROBOT ?  ( Y / N ) "))
 print()
-if progress == "y":
+if progress == "Y":
     data_base = "/"+api_key+"/"+api_secret+"/"+token+"/"+begin_money+"/"+status+"/"+asset_RB+"/"+low_gap+"/"+zone_1+"/"+mid_gap+"/"+zone_2+"/"+high_gap+"/"+zone_3+"/"+zone_4+"/"+limit_percent+"/"+EMAx+"/"+emat+"/"+sav+"/"+asset_saving+"/"+savx+"/"+savy+"/"+line+"/"+td+"/"+th+"/"+tm+"/"+ts
-    requests.post(url=variable.domain+"/"+"RM_DYNAMIC"+data_base)
+    requests.post(url=var_set.domain+"/"+"RM_DYNAMIC"+data_base)
 else :
     print("ROBOT_STOP")
 
