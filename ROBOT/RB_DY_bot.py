@@ -186,7 +186,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
                 '\n\n'+emoji.emojize(":blue_book:", use_aliases=True)+'All Saving  = '+str(amounty)+
                 '\n'+emoji.emojize(":blue_book:", use_aliases=True)+'Interest  = '+str(Interesty)+
 
-                '\n\n'+emoji.emojize(":moneybag:", use_aliases=True)+'BeginMoney  = '+str(begin_money)+' USDT' 
+                '\n\n'+emoji.emojize(":moneybag:", use_aliases=True)+'BeginMoney  = '+str(begin_money)+' USDT' +
                 '\n'+eg+'Growth      = '+str(gro)+' USDT'+
                 '\n'+eg+'Growth%     = '+str(gro_p)+"%"
 
@@ -416,7 +416,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
             print("-OFF- LineNotify Only Real-trade")
 
         else :
-            print("LineNotify error")
+            print("LineNotify error by",line)
 
     initial()
     while True:
