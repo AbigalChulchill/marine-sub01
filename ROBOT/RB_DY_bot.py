@@ -166,18 +166,18 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
                 eg = emoji.emojize(":chart_with_downwards_trend:", use_aliases=True)
 
             line = []
-            if os == 0:
+            if osx == 0:
                 line.append('Status     =    System_Stop')
-            elif os == 1:
+            elif osx == 1:
                 line.append('Status     =    System_Running')
-            elif os == 2:
+            elif osx == 2:
                 line.append('Status     =    System_Test')
                 
             messenger = Sendline(token)
             messenger.sendtext(
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(domain_name)+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Balance Ratio(d)'+
-                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Signal     =    "+str(signalx)+
+                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Signal     =    "+str(signaly)+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+str(line[0])+
                 
                 '\n\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+'date  = ' +str(time1)+
@@ -217,7 +217,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             
             return val_saving
         
-        os,signalx = Signal_Status()
+        osx,signaly = Signal_Status()
         
         # ประเมินก่อนซื้อขาย --------------------------------------------------------------------
         
@@ -286,7 +286,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             volume.append(final)
             value.append(different)
 
-            if os == 1:
+            if osx == 1:
                 try :
                     exchange.create_order(symbolx ,'market','sell',final)
                     
@@ -306,7 +306,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             volume.append(final)
             value.append(different)
             
-            if os == 1:
+            if osx == 1:
                 try :
                     exchange.create_order(symbolx ,'market','buy',final)
                 
