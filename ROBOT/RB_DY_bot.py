@@ -9,9 +9,9 @@ from tabulate import tabulate
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from binance import Client
-import variable
 
-def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts):
+
+def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
 
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
@@ -31,7 +31,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
 
         messenger = Sendline(token)
         messenger.sendtext(
-            '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(variable.name_domain)+
+            '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(domain_name)+
             '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Review RB_Ratio(d)'+
    
             "\n\nRatio 4 = "+str(zone_4)+"/"+str(z4)+
@@ -166,7 +166,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,status,asset_RB,low_g
                 
             messenger = Sendline(token)
             messenger.sendtext(
-                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(variable.name_domain)+
+                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(domain_name)+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Balance Ratio(d)'+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Signal     =    "+str(signalx)+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+str(line[0])+

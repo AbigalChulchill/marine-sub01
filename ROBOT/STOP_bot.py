@@ -1,12 +1,12 @@
 from songline import Sendline
 import emoji
 import sys
-import variable
 
-def stop(text,token):
+def stop(text,token,domain_name):
     
     messenger = Sendline(token)
         
-    messenger.sendtext("\n\n"+emoji.emojize(":bangbang:", use_aliases=True)+"("+str(variable.name_domain)+")"+" "+str(text)+emoji.emojize(":bangbang:", use_aliases=True))
+    messenger.sendtext("\n\n"+emoji.emojize(":bangbang:", use_aliases=True)+"("+str(domain_name)+")"+str(text)+emoji.emojize(":bangbang:", use_aliases=True))
+
 
     sys.exit()
