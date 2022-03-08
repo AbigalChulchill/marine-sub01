@@ -53,7 +53,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         
         signal = []
             
-        if emat == "1":
+        if EMAx == "Y":
             timef = emat
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=timef,limit=1000)
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
@@ -115,6 +115,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         # RUNNING เส้น EMA ไม่อยู่ในเงื่อนไข ขาขึ้น หรือ ขาลง
 
         if EMAx == "Y":
+
             print("Signal_Status    > ",ema_signal[0])
 
             if ((status == 1) and (ema_signal[0] != "RUNNING")) :           # Stop action
@@ -129,6 +130,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             signalx = ema_signal[0]                                     # portfolio & line
        
         elif EMAx == "N":   
+
             print("Signal_Status    > ","--OFF--")
 
             if status == 1:
