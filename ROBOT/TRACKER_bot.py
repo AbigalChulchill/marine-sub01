@@ -176,7 +176,6 @@ def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3
             '\n\n'+"STO K    =    " +str(kblue)  +
             '\n'+"STO D    =    " +str(dred)
 
-            
             )
         
         print("END of ROBOT")
