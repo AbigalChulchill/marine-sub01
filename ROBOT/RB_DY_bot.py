@@ -105,6 +105,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         ema_signal = EMA_base()
 
         os = 0
+        sx = []
         # os status 
         # 1 = เปิดการส่งคำสั่งซื้อขาย
         # 2 = Testing
@@ -127,7 +128,9 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             elif status == 0:                                              # Testing
                 os += 2
 
-            signalx = ema_signal[0]                                     # portfolio & line
+            # signalx = ema_signal[0]                                     # portfolio & line
+            s = ema_signal[0]  
+            sx.append(s)
        
         elif EMAx == "N":   
 
@@ -138,7 +141,9 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             elif status == 0:
                 os += 2
 
-            signalx = ("--OFF--")                                      # portfolio & line
+            s = "--OFF--"                                      # portfolio & line
+            sx.append(s)
+
         
         if status == "1":
             print("Rebalance_Status > ","RUNNING SYSTEM")
@@ -146,7 +151,9 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         else :
             print("Rebalance_Status > ","TESTING SYSTEM")
         print()
-
+        
+        signalx = sx[0]
+        
         return os,signalx
 
     def Balancec():

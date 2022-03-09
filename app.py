@@ -7,16 +7,17 @@ import setting
 
 app = Flask(__name__)
 
+dm = setting.domain_name
 
-class GOTO_ROBOT(threading.Thread):
+class GOTO_ROBOT(threading.Thread,dm):
      
-    domain_name = setting.domain_name
+    
 
-    def rb_dinammic(self,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,domain_name):
-        rebalance_dynamic(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,domain_name)
+    def rb_dinammic(self,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,dm):
+        rebalance_dynamic(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,dm)
 
-    def robot_track(self,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,domain_name):
-        tracker(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,domain_name)
+    def robot_track(self,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,dm):
+        tracker(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,dm)
 
     def notifi(self,text,token,domain_name):
         stop(text,token,domain_name)
