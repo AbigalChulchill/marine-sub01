@@ -35,13 +35,7 @@ print()
 print("===========================")
 print()
 begin_money = str(input('Begin_money = '))
-st = str(input('Do you want to START or TEST  ( S / T ) ? '))
-if st == "S":
-    status = str(1)
-elif st == "T":
-    status = str(0)
-else :
-    status = str(0)
+status = str(input('Do you want to START or TEST  ( S / T ) ? '))
 A = input('Asset_RB = ')
 asset_RB = str(A.upper())
 print()
