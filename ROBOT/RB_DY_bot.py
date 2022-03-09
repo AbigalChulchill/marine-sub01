@@ -68,14 +68,14 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             EMA2x = [EMA2[-1],EMA2[-2],EMA2[-3],EMA2[-4],EMA2[-5],EMA2[-6]]
             EMA3x = [EMA3[-1],EMA3[-2],EMA3[-3],EMA3[-4],EMA3[-5],EMA3[-6]]
             
-            EMAx = np.stack( (EMA1x,EMA2x,EMA3x), axis=1 )
+            ema_set = np.stack( (EMA1x,EMA2x,EMA3x), axis=1 )
 
             EMA_base = []
             
-            for j in range(len(EMAx)):
-                a = EMAx[j][0]
-                b = EMAx[j][1]
-                c = EMAx[j][2]
+            for j in range(len(ema_set)):
+                a = ema_set[j][0]
+                b = ema_set[j][1]
+                c = ema_set[j][2]
                 
                 if a < b < c :
                     EMA_base.append("down")
