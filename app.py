@@ -7,7 +7,7 @@ import setting
 
 app = Flask(__name__)
 
-dm = setting.domain_name
+
 
 class GOTO_ROBOT(threading.Thread):
      
@@ -23,10 +23,12 @@ class GOTO_ROBOT(threading.Thread):
 
 @app.route("/<ENTER>/<x>/<y>/<z>/<A1>/<A2>/<A3>/<A4>/<A5>/<A6>/<A7>/<A8>/<A9>/<A10>/<A11>/<A12>/<A13>/<A14>/<A15>/<A16>/<A17>/<A18>/<A19>/<A20>/<A21>/<A22>", methods=['POST'])
 def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22):
-    
+    dm = setting.domain_name
     GR = GOTO_ROBOT()
-    RM_DYNAMIC = threading.Thread(target=GR.rb_dinammic, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,) , daemon=True)
-    BOT_TRACK = threading.Thread(target=GR.robot_track, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,) , daemon=True)
+    RM_DYNAMIC = threading.Thread(target=GR.rb_dinammic, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,dm,) , daemon=True)
+    BOT_TRACK = threading.Thread(target=GR.robot_track, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,dm,) , daemon=True)
+    
+
 
     if ENTER == "RM_DYNAMIC":
         
@@ -44,17 +46,15 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
 
         text = "ROBOT_STOP"
         print("(",str(setting.domain_name),")"," ",text)
-        GR.notifi(text,z)
+        GR.notifi(text,z,dm)
         
 
     else :
         text = "STOP by error"
         print("(",str(setting.domain_name),")"," ",text)
-        GR.notifi(text,z)
+        GR.notifi(text,z,dm)
         
     return "ok"
-
-
 
 
 
