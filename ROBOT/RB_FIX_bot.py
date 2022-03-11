@@ -11,8 +11,8 @@ from dateutil.relativedelta import relativedelta
 from binance import Client
 
 
-def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
-
+def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
+    
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
     saving = Client(api_key,api_secret)
@@ -28,27 +28,6 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
     else :
         status = str(0)
 
-
-    def initial():
-
-        z1 = 100 - int(zone_1)
-        z2 = 100 - int(zone_2)
-        z3 = 100 - int(zone_3)
-        z4 = 100 - int(zone_4)
-
-        messenger = Sendline(token)
-        messenger.sendtext(
-            '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(domain_name)+
-            '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Review RB_Ratio(d)'+
-   
-            "\n\nRatio 4 = "+str(zone_4)+"/"+str(z4)+
-            "\n------------------ High gap = "+str(high_gap)+
-            "\nRatio 3 = "+str(zone_3)+"/"+str(z3)+
-            "\n------------------ mid gap = "+str(mid_gap)+
-            "\nRatio 2 = "+str(zone_2)+"/"+str(z2)+
-            "\n------------------ low gap = "+str(low_gap)+
-            "\nRatio 1 = "+str(zone_1)+"/"+str(z1)+"\n")
-            
     def EMA_base():
         
         signal = []
@@ -156,12 +135,11 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         
         return os,signalx
 
-    def Balancec():
+    def Balancef():
 
-        # ประเมิน indicator and status --------------------------------------------------------
-    
+        # ประเมิน indicator and status --------------------------------------------------------------------
+       
         def line_notify():
-            
             pri = '%.4f'%price_A
             emoji_bs = emo[0]
             bs = str(buysell[0])
@@ -179,15 +157,15 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
                 line.append('Status     =    System_Running')
             elif osx == 2:
                 line.append('Status     =    System_Test')
-                
+            
             messenger = Sendline(token)
             messenger.sendtext(
-
+                
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain     =    "+str(domain_name)+
-                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Balance Ratio(d)'+
+                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"System     =    "+'Balance Fix'+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Signal     =    "+str(signaly)+
                 '\n'+emoji.emojize(":wrench:", use_aliases=True)+str(line[0])+
-                
+                         
                 '\n\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+'date  = ' +str(time1)+
                 '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+'time  = '+str(time2)+
                 '\n'+emoji_bs+str(bs)+' '+str(vol)+' '+str(asset_RB)+
@@ -197,10 +175,10 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
                 '\n'+emoji.emojize(":open_file_folder:", use_aliases=True)+'Value.1  = '+str(value1)+' USD'+
                 # '\n'+emoji.emojize(":open_file_folder:", use_aliases=True)+'NAV.1    = '+str(navx)+' USD'+
 
-                '\n\n'+emoji.emojize(":open_file_folder:", use_aliases=True)+'Vol.2     = '+str(vol2)+' USDT'+
+                '\n\n'+emoji.emojize(":open_file_folder:", use_aliases=True)+'Vol.2  = '+str(vol2)+' '+'USDT'+
                 '\n'+emoji.emojize(":open_file_folder:", use_aliases=True)+'Value.2  = '+str(value2)+' USD'+
 
-                '\n\n'+(emoji.emojize(":moneybag:", use_aliases=True)*2)+'for  '+str(coin_per)+' / '+str(usdt_per)+' % '+(emoji.emojize(":moneybag:", use_aliases=True)*2)+
+                '\n\n'+(emoji.emojize(":moneybag:", use_aliases=True)*2)+'for fix '+str(Balance_fix)+' '+'USDT'+(emoji.emojize(":moneybag:", use_aliases=True)*2) +
 
                 '\n\n'+emoji.emojize(":blue_book:", use_aliases=True)+'All Saving  = '+str(amounty)+
                 '\n'+emoji.emojize(":blue_book:", use_aliases=True)+'Interest  = '+str(Interesty)+
@@ -226,8 +204,8 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             return val_saving
         
         osx,signaly = Signal_Status()
-        
-        # ประเมินก่อนซื้อขาย --------------------------------------------------------------------
+
+        # ประเมินก่อนซื้อขาย---------------------------------------------------------------------------------
         
         now = datetime.today()
         local = now + relativedelta(hours=int(7),minutes=int(0))
@@ -238,9 +216,9 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         # ตรวจสอบจำนวณเหรียญ -----------------------------------------------------------------------
         
         Get_balance = exchange.fetch_balance()
-        Volume_A = Get_balance [asset_RB] ['total'] #รอง
+        volume_A = Get_balance [asset_RB] ['total'] #รอง
         Volume_B = Get_balance ['USDT'] ['total'] #หลัก
-        print("Volume_A = " , '%.4f'%Volume_A,asset_RB)
+        print("Volume_A = " , '%.4f'%volume_A,asset_RB)
         print("Volume_B = " , '%.4f'%Volume_B,"USDT")
 
         # ราคาเหรียญ -----------------------------------------------------------------------
@@ -249,45 +227,23 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         price_A = get_price_A ['last'] 
         print("market price" ,str(asset_RB)," =",str('%.4f'%price_A))
 
-        # หาzone ของเหรียญ -----------------------------------------------------------------------
-    
-        if price_A <= int(low_gap) :
-            coin_per = int(zone_1)
-            usdt_per = 100 - coin_per
-        elif int(low_gap) < price_A <= int(mid_gap) :
-            coin_per = int(zone_2)
-            usdt_per = 100 - coin_per
-        elif int(low_gap) < int(mid_gap) < price_A <= int(high_gap) :
-            coin_per = int(zone_3)
-            usdt_per = 100 - coin_per
-        elif int(low_gap) < int(mid_gap) < int(high_gap) < price_A :
-            coin_per = int(zone_4)
-            usdt_per = 100 - coin_per
-        print("Dinamic_percent " ,str(coin_per),"/",str(usdt_per))
-        print()
-
-        # รายการซื้อขาย -----------------------------------------------------------------------
-            
-        # มูลค่าเหรียญ ใน port
-        value_A = Volume_A * price_A
-        value_B = Volume_B * 1
+        # รายการซื้อขาย------------------------------------------------------------------------------------
+        
+        # มูลค่าเหรียญใน PORT
+        value_A = volume_A * price_A
 
         emo = []
         buysell = []
         volume = []
-        value = [] 
+        value = []
 
-        #คำนวณ % เป็นมูลค่าที่ต้องมีใน port
-        balance_coin   = (  (  float(value_A) + float(value_B) ) *  coin_per ) / 100
-
-        # market -----------------------------------------------------------------------
-    
-        if  value_A > balance_coin + (balance_coin*float(limit_percent)/100) :
-            print("Value_",str(asset_RB),"_Inport_>_",str(coin_per),"% ")
-            
-            different  = value_A - balance_coin
-            final = different/price_A
-            print("sell",str('%.4f'%final),str(asset_RB))
+        # Asset > fix ที่กำหนด
+        if   value_A > Balance_fix + (Balance_fix * limit_percent/100) :
+            print("Fix Value ",str(asset_RB)," = ",str(Balance_fix),"USDT")
+             
+            different  = value_A - Balance_fix
+            final = different / price_A  #บอกจำนวนเหรียญที่ต้อง ขาย
+            print("sell",'%.4f'%final,str(asset_RB))
 
             emo.append(emoji.emojize(":apple:", use_aliases=True))
             buysell.append("sell")
@@ -302,37 +258,36 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
                     print("Value market less than 10 usd")
             else :
                 print("error by sent order")
-        
+
+        # Asset < fix ที่กำหนด
+        elif value_A < Balance_fix - (Balance_fix * float(limit_percent)/100) :
+            print("Value_ ",str(asset_RB),"_Inport_<_",str(Balance_fix),"USDT")
             
-        elif value_A < balance_coin - (balance_coin*float(limit_percent)/100):
-            print("Value_",str(asset_RB),"_Inport_<_",str(coin_per),"% ")
-            
-            different  = balance_coin - value_A
-            final = different/price_A
+            different  = Balance_fix - value_A
+            final = different / price_A  #บอกจำนวนเหรียญที่ต้อง ขาย
             print("buy",str('%.4f'%final),str(asset_RB))
 
             emo.append(emoji.emojize(":green_apple:", use_aliases=True))
             buysell.append("buy")
             volume.append(final)
             value.append(different)
-            
+
             if osx == 1:
                 try :
                     exchange.create_order(symbolx ,'market','buy',final)
                 
                 except :
                     print("Value market less than 10 usd")
-        
-            
+
         else :
             emo.append(emoji.emojize(":x:", use_aliases=True))
             buysell.append("non")
             volume.append(0.0)
             value.append(0.0)
-            print("None Trade")  
+            print("None Trade") 
 
-        # sumary get balance ----------------------------------------------------------------
-    
+        # sumary get balance-----------------------------------------------------------------------------
+
         #ตรวจจำนวณเหรียญ ในบัญชี
         Get_balanceAA = exchange.fetch_balance()
         volume_AA = Get_balanceAA [(asset_RB)] ['total']
@@ -345,7 +300,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         # มูลค่าเหรียญใน PORT
         value_AA = volume_AA * price_AA
         value_BB = volume_BB
-        value_AB = value_AA + value_BB    
+        value_AB = value_AA + value_BB
 
         # ดึงข้อมูล Portfolio ที่ผ่านมา ----------------------------------------------------------------
         # ดึงเฉพาะ สถานะ initial & buy มาคำนวณ nav -------------------------------------------------
@@ -440,9 +395,8 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         else :
             print("LineNotify error by",line)
 
-    initial()
     while True:
-        Balancec()
+        Balancef()
         try:
             when_to_stop = abs(int(countdown))
         except:
@@ -459,10 +413,4 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             when_to_stop -= 1
         print()
 
-
-
-
-
-
-
-
+        

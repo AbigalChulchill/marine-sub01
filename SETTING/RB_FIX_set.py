@@ -1,31 +1,6 @@
 import requests
 import var_set
 
-def sumary():
-
-    u1 = 100 - zone_1
-    u2 = 100 - zone_2
-    u3 = 100 - zone_3
-    u4 = 100 - zone_4
-
-    print("---------------------------------------------------")
-    print()
-    print("Ratio 4 = ",str(zone_4),"/",str(u4))
-    print()
-    print("----------------------- High gap = ",str(high_gap))
-    print()
-    print("Ratio 3 = ",str(zone_3),"/",str(u3))
-    print()
-    print("----------------------- mid gap = ",str(mid_gap))
-    print()
-    print("Ratio 2 = ",str(zone_2),"/",str(u2))
-    print()
-    print("----------------------- low gap = ",str(low_gap))
-    print()
-    print("Ratio 1 = ",str(zone_1),"/",str(u1))
-    print()
-    print("---------------------------------------------------")
-
 print("===========================")
 print()
 api_key = str(input("api_key = "))
@@ -41,17 +16,7 @@ asset_RB = str(A.upper())
 print()
 print("===========================")
 print()
-low_gap = str(input('low_gap = '))
-zone_1 = str(input('Ratio_zone_1 = '))
-print()
-mid_gap = str(input('mid_gap = '))
-zone_2 = str(input('Ratio_zone_2 = '))
-print()
-high_gap = str(input('high_gap = '))
-zone_3 = str(input('Ratio_zone_3 = '))
-print()
-print("over_high_gap")
-zone_4 = str(input('Ratio_zone_4 = '))
+balance_fix = str(input('Balance_Fix = '))
 print()
 print("===========================")
 print()
@@ -104,15 +69,12 @@ print()
 print("===========================")
 print()
 show = str(input("Do you want to show sumary ?  ( Y / N ) "))
-if show == "Y":
-    sumary()  
-else :
-    pass
+
 print()
 progress = str(input("DO YOU WANT TO PROGRESS ROBOT ?  ( Y / N ) "))
 print()
 if progress == "Y":
-    data_base = "/"+api_key+"/"+api_secret+"/"+token+"/"+begin_money+"/"+status+"/"+asset_RB+"/"+low_gap+"/"+zone_1+"/"+mid_gap+"/"+zone_2+"/"+high_gap+"/"+zone_3+"/"+zone_4+"/"+limit_percent+"/"+EMAx+"/"+emat+"/"+sav+"/"+asset_saving+"/"+savx+"/"+savy+"/"+line+"/"+td+"/"+th+"/"+tm+"/"+ts
+    data_base = "/"+api_key+"/"+api_secret+"/"+token+"/"+begin_money+"/"+status+"/"+asset_RB+"/"+balance_fix+"/"+limit_percent+"/"+EMAx+"/"+emat+"/"+sav+"/"+asset_saving+"/"+savx+"/"+savy+"/"+line+"/"+td+"/"+th+"/"+tm+"/"+ts
     requests.post(url=var_set.domain+"/"+"RB_DYNAMIC"+data_base)
 else :
     print("ROBOT_STOP")
