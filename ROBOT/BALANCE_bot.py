@@ -68,13 +68,13 @@ def total_sym(api_key,api_secret,token,asset,domain_name):
     messenger.sendtext(
 
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain   =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+str(sym)+"    =    "+str(Volume_A)+" coin"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+"USDT"+"    =    "+str(Volume_B)+" coin"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+str(sym)+"    =    "+str('%.4f'%Volume_A)+" coin"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" coin"+
 
-        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Val."+str(sym)+"    =    "+str(val)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Val."+"USDT"+"    =    "+str(Volume_B)+" USDT"+
+        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Val."+str(sym)+"    =    "+str('%.4f'%val)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Val."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" USDT"+
 
-        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Sum_Value"+"    =    "+str(total_pair)+" USDT")
+        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Sum_Value"+"    =    "+str('%.4f'%total_pair)+" USDT")
 
 def saving_sym(api_key,api_secret,token,asset,domain_name):
    
@@ -90,7 +90,7 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
     messenger.sendtext(
 
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(total_inter)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str(total_sav)+" USDT")
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str('%.4f'%today_sav)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str('%.4f'%total_inter)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str('%.4f'%total_sav)+" USDT")
 
