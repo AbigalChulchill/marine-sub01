@@ -48,7 +48,7 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
     #---------------------------------------------------------------------------------------------
     if ENTER == "T_SPOT":
 
-        text = "T_SPORT"
+        text = "T_SPOT"
         print("(",str(setting.domain_name),")"," ",text)
         GR.t_spot(x,y,z,dm)
 
@@ -58,9 +58,9 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
         print("(",str(setting.domain_name),")"," ",text)
         GR.t_sym(x,y,z,A1,dm)
 
-    elif ENTER == "SAV_SYM":
+    elif ENTER == "S_SYM":
 
-        text = "T_SPOT"
+        text = "S_SYM"
         print("(",str(setting.domain_name),")"," ",text)
         GR.sav_sym(x,y,z,A1,dm)
     
