@@ -4,7 +4,7 @@ from songline import Sendline
 from binance import Client
 
 def total_spot(api_key,api_secret,token,domain_name):
-
+    print("com in the room ")
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
         
