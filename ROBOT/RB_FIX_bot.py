@@ -238,10 +238,10 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
         value = []
 
         # Asset > fix ที่กำหนด
-        if   value_A > Balance_fix + (Balance_fix * limit_percent/100) :
+        if   value_A > float(Balance_fix) + (float(Balance_fix) * float(limit_percent)/100) :
             print("Fix Value ",str(asset_RB)," = ",str(Balance_fix),"USDT")
              
-            different  = value_A - Balance_fix
+            different  = value_A - float(Balance_fix)
             final = different / price_A  #บอกจำนวนเหรียญที่ต้อง ขาย
             print("sell",'%.4f'%final,str(asset_RB))
 
@@ -260,10 +260,10 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
                 print("error by sent order")
 
         # Asset < fix ที่กำหนด
-        elif value_A < Balance_fix - (Balance_fix * float(limit_percent)/100) :
+        elif value_A < float(Balance_fix) - (float(Balance_fix) * float(limit_percent)/100) :
             print("Value_ ",str(asset_RB),"_Inport_<_",str(Balance_fix),"USDT")
             
-            different  = Balance_fix - value_A
+            different  = float(Balance_fix) - value_A
             final = different / price_A  #บอกจำนวนเหรียญที่ต้อง ขาย
             print("buy",str('%.4f'%final),str(asset_RB))
 

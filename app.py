@@ -42,7 +42,7 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
     dm = setting.domain_name
     GR = GOTO_ROBOT()
     RB_DYNAMIC = threading.Thread(target=GR.rb_dinammic, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,dm,) , daemon=True)
-    RB_FIX = threading.Thread(target=GR.rb_dinammic, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,dm,) , daemon=True)
+    RB_FIX = threading.Thread(target=GR.rb_fix, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,dm,) , daemon=True)
     BOT_TRACK = threading.Thread(target=GR.robot_track, args=(x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,dm,) , daemon=True)
     
     #---------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
     #---------------------------------------------------------------------------------------------
 
     elif ENTER == "RB_FIX":
-    
+        
         print("(",str(setting.domain_name),")"," ","RB_FIX")
         RB_FIX.start()
 
