@@ -82,19 +82,15 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
     log = Client(api_key,api_secret)
     data_in = log.get_lending_position(asset = str(sym))
 
-    today_sav = data_in[0]['todayPurchasedAmount']          #วันนี้ฝากไปเท่าไหร่
-    total_sav = data_in[0]['totalAmount']                   #จำนวนเหรียญฝากทั้งหมด
-    total_inter = data_in[0]['totalInterest']               #ดอกเบี้ยสะสม
-
-    ts = '%.4f'%today_sav
-    ti = '%.4f'%total_inter
-    ts = '%.4f'%total_sav
+    today_sav = float(data_in[0]['todayPurchasedAmount'])       #วันนี้ฝากไปเท่าไหร่
+    total_sav = float(data_in[0]['totalAmount'])                   #จำนวนเหรียญฝากทั้งหมด
+    total_inter = float(data_in[0]['totalInterest'])               #ดอกเบี้ยสะสม
 
     messenger = Sendline(token)
     messenger.sendtext(
 
         '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(ts)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(ti)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str(ts)+" USDT")
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(total_sav)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str(total_inter)+" USDT")
 
