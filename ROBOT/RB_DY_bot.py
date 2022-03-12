@@ -9,9 +9,10 @@ from tabulate import tabulate
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from binance import Client
+import yagmail
 
 
-def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
+def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
 
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
@@ -29,7 +30,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         status = str(0)
 
 
-    def initial():
+    def int_line():
 
         z1 = 100 - int(zone_1)
         z2 = 100 - int(zone_2)
@@ -48,7 +49,42 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             "\nRatio 2 = "+str(zone_2)+"/"+str(z2)+
             "\n------------------ low gap = "+str(low_gap)+
             "\nRatio 1 = "+str(zone_1)+"/"+str(z1)+"\n")
-            
+
+    def int_port():
+
+        now = datetime.today()
+        local = now + relativedelta(hours=int(7),minutes=int(0))
+        time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
+        time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
+        timex = time1 +" *** "+ time2
+
+
+        trend = "-----"
+        date = timex
+        symbol = asset_RB
+        ratio = "-----"
+        price = "-----"
+        market = "-----"
+        volBS = "-----"
+        valBS = "-----"
+        final_value = "-----"
+        growth = "-----"
+        growth_rate = "-----"
+        totalSaving = "-----"
+        interest = "-----"
+
+        # imail = 
+        # ipassword = 
+        # remail = 
+
+        yag = yagmail.SMTP('harith.detbun@gmail.com', 'Harith11000')
+
+        head = 'Portfolio'
+        text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+
+        yag.send('robot.portfolio.01@gmail.com', head, text)
+
+
     def EMA_base():
         
         signal = []
@@ -406,6 +442,40 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         gro_p = '%.2f'%growth_per
         
         # ส่งข้อมูลไปเก็บยัง port------------------------------------------------------------------
+
+        now = datetime.today()
+        local = now + relativedelta(hours=int(7),minutes=int(0))
+        time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
+        time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
+        timex = time1 +" *** "+ time2
+
+
+        trend = signaly
+        date = timex
+        symbol = asset_RB
+        ratio = coin_per+"/"+usdt_per
+        price = price_A
+        market = buysell[0]
+        volBS = value[0]
+        valBS = value[0]
+        final_value = value_AB
+        growth = gro
+        growth_rate = gro_p
+        totalSaving = amounty
+        interest = Interesty
+
+        # imail = 
+        # ipassword = 
+        # remail = 
+
+        yag = yagmail.SMTP('harith.detbun@gmail.com', 'Harith11000')
+
+        head = 'Portfolio'
+        text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+
+        yag.send('robot.portfolio.01@gmail.com', head, text)
+
+
         # ส่ง ค่าเป็นตาราง-----------------------------------------------------------------------
 
         vol1 = '%.4f'%volume_AA
@@ -442,7 +512,8 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         else :
             print("LineNotify error by",line)
 
-    initial()
+    int_line()
+    int_port()
     while True:
         Balancec()
         try:
