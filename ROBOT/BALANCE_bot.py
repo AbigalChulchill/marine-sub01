@@ -90,7 +90,7 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
     messenger.sendtext(
 
         '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(total_sav)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str(total_inter)+" USDT")
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str('%.4f'%today_sav)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str('%.4f'%total_sav)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str('%.4f'%total_inter)+" USDT")
 
