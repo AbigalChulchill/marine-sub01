@@ -82,6 +82,7 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
     log = Client(api_key,api_secret)
     data_in = log.get_lending_position(asset = str(sym))
 
+
     today_sav = float(data_in[0]['todayPurchasedAmount'])       #วันนี้ฝากไปเท่าไหร่
     total_sav = float(data_in[0]['totalAmount'])                   #จำนวนเหรียญฝากทั้งหมด
     total_inter = float(data_in[0]['totalInterest'])               #ดอกเบี้ยสะสม
