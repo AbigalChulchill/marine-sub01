@@ -138,14 +138,19 @@ def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3
 
             '\n\n'+str(utc)+ " ---> " +"UTC"+ 
 
-            '\n\n'"Grayscale Bitcoin , MicroStrategy" +
-            '\n'+str(t00500) + " (-5) " +
+            '\n\n'+emoji.emojize(":earth_americas:", use_aliases=True)+"Grayscale Bitcoin , MicroStrategy" +
+            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t00500) + " (-5) " +
             
-            '\n\n'+str(t0100) + " (+1)---> " + "IT,BE"+
-            '\n'+str(t0530) + " (+5:3)---> " + "IN" +
-            '\n'+str(t0700) + " (+7)---> " + "TH,VNM"+
-            '\n'+str(t0800) + " (+8)---> " + "MY,PH,HK" +
-            '\n'+str(t0900) + " (+9)---> " + "SKR" +
+            '\n\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"IT,BE"+
+            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0100) + " (+1)"+
+            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"IN"+
+            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0530) + " (+5:30)"+
+            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"TH,VNM"+
+            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0700) + " (+7)"+
+            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"MY,PH,HK"+
+            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0800) + " (+8)"+
+            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"SKR"+
+            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0900) + " (+9)"+
 
             '\n\n'+"SYMBOL    =    " + str(symbolx)+
             '\n'+"TIMEFRAME    =    " + str(ind_t)+
