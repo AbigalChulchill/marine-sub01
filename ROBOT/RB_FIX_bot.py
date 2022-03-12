@@ -278,6 +278,9 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
                 
                 except :
                     print("Value market less than 10 usd")
+                    
+            else :
+                print("error by sent order")
 
         else :
             emo.append(emoji.emojize(":x:", use_aliases=True))

@@ -67,7 +67,7 @@ def total_sym(api_key,api_secret,token,asset,domain_name):
     messenger = Sendline(token)
     messenger.sendtext(
 
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain   =    "+str(domain_name)+
+        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain   =    "+str(domain_name)+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+str(sym)+"    =    "+str('%.4f'%Volume_A)+" coin"+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" coin"+
 
@@ -86,11 +86,15 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
     total_sav = data_in[0]['totalAmount']                   #จำนวนเหรียญฝากทั้งหมด
     total_inter = data_in[0]['totalInterest']               #ดอกเบี้ยสะสม
 
+    ts = '%.4f'%today_sav
+    ti = '%.4f'%total_inter
+    ts = '%.4f'%total_sav
+
     messenger = Sendline(token)
     messenger.sendtext(
 
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str('%.4f'%today_sav)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str('%.4f'%total_inter)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str('%.4f'%total_sav)+" USDT")
+        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(ts)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(ti)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str(ts)+" USDT")
 

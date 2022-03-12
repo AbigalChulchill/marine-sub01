@@ -322,6 +322,8 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
                 
                 except :
                     print("Value market less than 10 usd")
+            else :
+                print("error by sent order")
         
             
         else :
