@@ -95,3 +95,61 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(total_sav)+" USDT"+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_sav    =    "+str(total_inter)+" USDT")
 
+# def log
+import imaplib
+import email
+
+#credentials
+username ="robot.portfolio.01@gmail.com"
+
+#generated app password
+app_password= "@01portfolio"
+
+# https://www.systoolsgroup.com/imap/
+gmail_host= 'imap.gmail.com'
+
+#set connection
+mail = imaplib.IMAP4_SSL(gmail_host)
+
+#login
+mail.login(username, app_password)
+
+#select inbox
+mail.select("INBOX")
+
+#select specific mails
+_, selected_mails = mail.search(None, '(FROM "harith.detbun@gmail.com")')
+
+#total number of mails from specific user
+print("Portfolio from harith.detbun@gmail.com:" , len(selected_mails[0].split()))
+
+
+tx = []
+
+for i in selected_mails[0].split():
+    _, data = mail.fetch(i , '(RFC822)')
+    _, bytes_data = data[0]
+
+    #convert the byte data to message
+    email_message = email.message_from_bytes(bytes_data)
+
+  
+    for j in email_message.walk():
+        
+        if j.get_content_type()=="text/plain" or j.get_content_type()=="text/html":
+            message = j.get_payload(decode=True)
+            mes =  message.decode()
+            tex = mes.split("\n")
+            del_r = tex[0]    # ถ้ามีการเพิ่ม หรรือลบ จำนวนตัวแปล ตเองมาแก้ตรงนี้ด้วย 
+            text = del_r.replace('\r', '')
+            tx.append(text)
+           
+            break
+
+for j in range(len(tx)):
+    num = j + 1
+    print(num,". ", tx[j])
+
+
+    
+
