@@ -12,7 +12,6 @@ from binance import Client
 import yagmail
 import smtplib
 
-
 def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,port,imail,ipass,remail,domain_name):
 
     password = ""
@@ -91,6 +90,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
 
         %s
         """ % (sent_from, ", ".join(to), subject, body_x)
+
 
         try:
             smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
