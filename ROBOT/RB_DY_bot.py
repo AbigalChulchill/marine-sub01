@@ -12,7 +12,7 @@ from binance import Client
 import yagmail
 
 
-def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
+def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,port,imail,ipass,remail,domain_name):
 
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
@@ -73,17 +73,17 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
         totalSaving = "-----"
         interest = "-----"
 
-        # imail = 
-        # ipassword = 
-        # remail = 
-
-        yag = yagmail.SMTP('harith.detbun@gmail.com', 'Harith11000')
+        yag = yagmail.SMTP(imail, ipass)
 
         head = 'Portfolio'
-        text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+        
+        textx = ["trend"+","+"date"+","+"symbol"+","+"ratio"+","+"price"+","+"market"+","+"volBS"+","+"valBS"+","+"final_value"+","+"growth"+","+"growth_rate"+","+"totalSaving"+","+"interest"]
+        yag.send(remail, head, textx)
 
-        yag.send('robot.portfolio.01@gmail.com', head, text)
+        time.sleep(5)
 
+        texty = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+        yag.send('robot.portfolio.01@gmail.com', head, texty)
 
     def EMA_base():
         
@@ -261,6 +261,31 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
             
             return val_saving
         
+        def fin_port():
+
+            trend = signaly
+            date = timex
+            symbol = asset_RB
+            ratio = coin_per+"/"+usdt_per
+            price = price_A
+            market = buysell[0]
+            volBS = value[0]
+            valBS = value[0]
+            final_value = value_AB
+            growth = gro
+            growth_rate = gro_p
+            totalSaving = amounty
+            interest = Interesty
+
+           
+
+            yag = yagmail.SMTP(imail, ipass)
+
+            head = 'Portfolio'
+            text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+
+            yag.send(remail, head, text)
+
         osx,signaly = Signal_Status()
         
         # ประเมินก่อนซื้อขาย --------------------------------------------------------------------
@@ -269,6 +294,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
+        timex = time1 +" *** "+ time2
         print("  date   = ",time1,"\n"," time   = ",time2)
 
         # ตรวจสอบจำนวณเหรียญ -----------------------------------------------------------------------
@@ -336,8 +362,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
                     
                 except :
                     print("Value market less than 10 usd")
-            else :
-                print("error by sent order")
+            
         
             
         elif value_A < balance_coin - (balance_coin*float(limit_percent)/100):
@@ -358,8 +383,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
                 
                 except :
                     print("Value market less than 10 usd")
-            else :
-                print("error by sent order")
+         
         
             
         else :
@@ -443,38 +467,20 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
         
         # ส่งข้อมูลไปเก็บยัง port------------------------------------------------------------------
 
-        now = datetime.today()
-        local = now + relativedelta(hours=int(7),minutes=int(0))
-        time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
-        time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
-        timex = time1 +" *** "+ time2
+        if  port == "Y" :
 
+            if value[0] > 10 :
+                fin_port()    
+            else :
+                print("-OFF- portfolio less than 10")
 
-        trend = signaly
-        date = timex
-        symbol = asset_RB
-        ratio = coin_per+"/"+usdt_per
-        price = price_A
-        market = buysell[0]
-        volBS = value[0]
-        valBS = value[0]
-        final_value = value_AB
-        growth = gro
-        growth_rate = gro_p
-        totalSaving = amounty
-        interest = Interesty
+        elif port == "N" :
+            print("-OFF- portfolio Only Real-trade")
+            fin_port() 
 
-        # imail = 
-        # ipassword = 
-        # remail = 
-
-        yag = yagmail.SMTP('harith.detbun@gmail.com', 'Harith11000')
-
-        head = 'Portfolio'
-        text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
-
-        yag.send('robot.portfolio.01@gmail.com', head, text)
-
+        else :
+            print("Portfolio error by",port)
+       
 
         # ส่ง ค่าเป็นตาราง-----------------------------------------------------------------------
 
@@ -511,6 +517,9 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipassword,remail,begin_mone
 
         else :
             print("LineNotify error by",line)
+
+        # ---------------------------------------------------------------------------------
+
 
     int_line()
     int_port()
