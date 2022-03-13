@@ -189,6 +189,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
     def Balancef():
 
+        print("ENTER FINISH")
         # ประเมิน indicator and status --------------------------------------------------------------------
        
         def line_notify():
