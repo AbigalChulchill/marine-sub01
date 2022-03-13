@@ -8,9 +8,10 @@ from songline import Sendline
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import SETTING.var_set as var_set
+import smtplib
 
 
-def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3,s1,s2,s3,s4,td,th,tm,ts,domain_name):
+def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3,s1,s2,s3,s4,td,th,tm,ts,domain_name):
 
     countdown = (int(td) * 86400)+ (int(th) * 3600) + (int(tm) * 60) + int(ts)
     
@@ -74,8 +75,10 @@ def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3
         t0900 = str(G1)+" *** "+str(G2)
 
         # ========================================================================
+
         get_price_A  = exchange.fetch_ticker(symbolx)
         price_A = get_price_A ['last']
+
         # ========================================================================
 
         EMA1  = data.ta.ema(int(e1))
@@ -126,6 +129,44 @@ def tracker(api_key,api_secret,token,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3
 
         kblue = '%.2f'%STOx[-1][0]
         dred = '%.2f'%STOx[-1][1]
+
+        # ================================================================
+
+        tx = str(t0700)
+        sym = symbolx
+        ema = ema_status
+        rx = str(rsi)
+        bbandx = str(up_per)+"/"+str(low_per)
+        macdx = str(macd)+"/"+str(fast)+"/"+str(slow)
+        stox = str(kblue)+"/"+str(dred)
+        
+        gmail_user = imail
+        gmail_password = ipass
+
+        sent_from = gmail_user
+        to = [remail]
+        subject = 'TRACKER'
+        body_x = tx+" , "+sym+" , "+ema+" , "+rx+" , "+bbandx+" , "+macdx+" , "+stox
+
+        email_text = """\
+        From: %s
+        To: %s
+        Subject: %s
+
+        %s
+        """ % (sent_from, ", ".join(to), subject, body_x)
+
+        try:
+            smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            smtp_server.ehlo()
+            smtp_server.login(gmail_user, gmail_password)
+            smtp_server.sendmail(sent_from, to, email_text)
+            smtp_server.close()
+            # print ("Email sent successfully!")
+
+        except Exception as ex:
+            print ("Something went wrong….",ex)
+
 
         # ================================================================
         

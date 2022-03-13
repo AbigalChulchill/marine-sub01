@@ -9,9 +9,9 @@ from tabulate import tabulate
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from binance import Client
+import smtplib
 
-
-def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
+def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st,asset_RB,Balance_fix,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
     
     password = ""
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
@@ -27,6 +27,56 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
         status = str(0)
     else :
         status = str(0)
+
+    def int_port():
+
+        now = datetime.today()
+        local = now + relativedelta(hours=int(7),minutes=int(0))
+        time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
+        time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
+        timex = time1 +" *** "+ time2
+
+        trend = "-----"
+        date = timex
+        symbol = asset_RB
+        ratio = "-----"
+        price = "-----"
+        market = "-----"
+        volBS = "-----"
+        valBS = "-----"
+        final_value = str(begin_money)
+        growth = "-----"
+        growth_rate = "-----"
+        SavingAll = "-----"
+        interest = "-----"
+
+        gmail_user = imail
+        gmail_password = ipass
+
+        sent_from = gmail_user
+        to = [remail]
+        subject = 'Portfolio'
+        # body_x = "trend"+","+"date"+","+"symbol"+","+"ratio"+","+"price"+","+"market"+","+"volBS"+","+"valBS"+","+"final_value"+","+"growth"+","+"growth_rate"+","+"SavingAll"+","+"interest"
+        body_x = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
+
+
+        email_text = """\
+        From: %s
+        To: %s
+        Subject: %s
+
+        %s
+        """ % (sent_from, ", ".join(to), subject, body_x)
+
+
+        try:
+            smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            smtp_server.ehlo()
+            smtp_server.login(gmail_user, gmail_password)
+            smtp_server.sendmail(sent_from, to, email_text)
+            smtp_server.close()
+        except Exception as ex:
+            print ("Something went wrong….",ex)
 
     def EMA_base():
         
@@ -140,6 +190,7 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
         # ประเมิน indicator and status --------------------------------------------------------------------
        
         def line_notify():
+
             pri = '%.4f'%price_A
             emoji_bs = emo[0]
             bs = str(buysell[0])
@@ -203,6 +254,48 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
             
             return val_saving
         
+        def fin_port():
+
+            trend = str(signaly)
+            date = str(timex)
+            symbol = asset_RB
+            fix = str(Balance_fix)
+            price = str('%.4f'%price_A)
+            market = buysell[0]
+            volBS = str('%.4f'%volume[0])
+            valBS = str('%.4f'%value[0])
+            final_value = str('%.4f'%value_AB)
+            growth = str(gro)
+            growth_rate = str(gro_p)
+            SavingAll = str(amounty)
+            interest = str(Interesty)
+
+            gmail_user = imail
+            gmail_password = ipass
+
+            sent_from = gmail_user
+            to = [remail]
+            subject = 'Test'
+            body = trend+","+date+","+symbol+","+fix+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
+
+            email_text = """\
+            From: %s
+            To: %s
+            Subject: %s
+
+            %s
+            """ % (sent_from, ", ".join(to), subject, body)
+
+            try:
+                smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+                smtp_server.ehlo()
+                smtp_server.login(gmail_user, gmail_password)
+                smtp_server.sendmail(sent_from, to, email_text)
+                smtp_server.close()
+                print ("Email sent successfully!")
+            except Exception as ex:
+                print ("Something went wrong….",ex)
+
         osx,signaly = Signal_Status()
 
         # ประเมินก่อนซื้อขาย---------------------------------------------------------------------------------
@@ -211,6 +304,7 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
+        timex = time1 +" *** "+ time2
         print("  date   = ",time1,"\n"," time   = ",time2)
 
         # ตรวจสอบจำนวณเหรียญ -----------------------------------------------------------------------
@@ -256,9 +350,7 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
                     
                 except :
                     print("Value market less than 10 usd")
-            else :
-                print("error by sent order")
-
+             
         # Asset < fix ที่กำหนด
         elif value_A < float(Balance_fix) - (float(Balance_fix) * float(limit_percent)/100) :
             print("Value_ ",str(asset_RB),"_Inport_<_",str(Balance_fix),"USDT")
@@ -279,8 +371,6 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
                 except :
                     print("Value market less than 10 usd")
                     
-            else :
-                print("error by sent order")
 
         else :
             emo.append(emoji.emojize(":x:", use_aliases=True))
@@ -362,6 +452,22 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
         gro_p = '%.2f'%growth_per
         
         # ส่งข้อมูลไปเก็บยัง port------------------------------------------------------------------
+        
+        if  rec == "Y" :
+
+            if value[0] > 10 :
+                fin_port()    
+            else :
+                print("-OFF- portfolio less than 10")
+
+        elif rec == "N" :
+            print("-OFF- portfolio Only Real-trade")
+            fin_port() 
+
+        else :
+            print("Portfolio error by",rec)
+        
+        
         # ส่ง ค่าเป็นตาราง-----------------------------------------------------------------------
 
         vol1 = '%.4f'%volume_AA
@@ -397,7 +503,11 @@ def rebalance_fix(api_key,api_secret,token,begin_money,st,asset_RB,Balance_fix,l
 
         else :
             print("LineNotify error by",line)
+        
+        print("Sleep time !!")
 
+
+    int_port()
     while True:
         Balancef()
         try:
