@@ -299,7 +299,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             trend = signaly
             date = timex
             symbol = asset_RB
-            ratio = coin_per+"/"+usdt_per
+            ratio = str(coin_per)+"/"+str(usdt_per)
             price = price_A
             market = buysell[0]
             volBS = value[0]
