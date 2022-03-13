@@ -303,10 +303,10 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             volBS = str('%.4f'%value[0])
             valBS = str('%.4f'%value[0])
             final_value = str('%.4f'%value_AB)
-            growth = str('%.2f'%gro)
-            growth_rate = str('%.2f'%gro_p)
-            totalSaving = str('%.2f'%amounty)
-            interest = str('%.2f'%Interesty)
+            growth = str(gro)
+            growth_rate = str(gro_p)
+            totalSaving = str(amounty)
+            interest = str(Interesty)
 
             gmail_user = imail
             gmail_password = ipass

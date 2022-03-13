@@ -142,13 +142,15 @@ for i in selected_mails[0].split():
             tex = mes.split("\n")
             del_r = tex[0]    # ถ้ามีการเพิ่ม หรรือลบ จำนวนตัวแปล ตเองมาแก้ตรงนี้ด้วย 
             text = del_r.replace('\r', '')
-            tx.append(text)
+            textx = text[13:]
+            print(textx)
+            # tx.append(text)
            
             break
 
-for j in range(len(tx)):
-    num = j + 1
-    print(num,". ", tx[j])
+# for j in range(len(tx)):
+#     num = j + 1
+#     print(num,". ", tx[j])
 
 
     
