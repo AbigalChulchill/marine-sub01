@@ -10,6 +10,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from binance import Client
 import yagmail
+import smtplib
 
 
 def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,port,imail,ipass,remail,domain_name):
@@ -73,17 +74,47 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         totalSaving = "-----"
         interest = "-----"
 
-        yag = yagmail.SMTP(imail, ipass)
+        gmail_user = imail
+        gmail_password = ipass
 
-        head = 'Portfolio'
+        sent_from = gmail_user
+        to = [remail]
+        subject = 'Test'
+        body_x = "trend"+","+"date"+","+"symbol"+","+"ratio"+","+"price"+","+"market"+","+"volBS"+","+"valBS"+","+"final_value"+","+"growth"+","+"growth_rate"+","+"totalSaving"+","+"interest"
+        body_y = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest
+
+
+        email_text = """\
+        From: %s
+        To: %s
+        Subject: %s
+
+        %s
+        """ % (sent_from, ", ".join(to), subject, body_x)
+
+        try:
+            smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            smtp_server.ehlo()
+            smtp_server.login(gmail_user, gmail_password)
+            smtp_server.sendmail(sent_from, to, email_text)
+            smtp_server.close()
+            print ("Email sent successfully!")
+        except Exception as ex:
+            print ("Something went wrong….",ex)
+
+
+
+        # yag = yagmail.SMTP(imail, ipass)
+
+        # head = 'Portfolio'
         
-        textx = ["trend"+","+"date"+","+"symbol"+","+"ratio"+","+"price"+","+"market"+","+"volBS"+","+"valBS"+","+"final_value"+","+"growth"+","+"growth_rate"+","+"totalSaving"+","+"interest"]
-        yag.send(remail, head, textx)
+        # textx = ["trend"+","+"date"+","+"symbol"+","+"ratio"+","+"price"+","+"market"+","+"volBS"+","+"valBS"+","+"final_value"+","+"growth"+","+"growth_rate"+","+"totalSaving"+","+"interest"]
+        # yag.send(remail, head, textx)
 
-        time.sleep(5)
+        # time.sleep(5)
 
-        texty = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
-        yag.send('robot.portfolio.01@gmail.com', head, texty)
+        # texty = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+        # yag.send('robot.portfolio.01@gmail.com', head, texty)
 
     def EMA_base():
         
@@ -277,14 +308,44 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             totalSaving = amounty
             interest = Interesty
 
+            gmail_user = imail
+            gmail_password = ipass
+
+            sent_from = gmail_user
+            to = [remail]
+            subject = 'Test'
+            body = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest
+
+
+            email_text = """\
+            From: %s
+            To: %s
+            Subject: %s
+
+            %s
+            """ % (sent_from, ", ".join(to), subject, body)
+
+            try:
+                smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+                smtp_server.ehlo()
+                smtp_server.login(gmail_user, gmail_password)
+                smtp_server.sendmail(sent_from, to, email_text)
+                smtp_server.close()
+                print ("Email sent successfully!")
+            except Exception as ex:
+                print ("Something went wrong….",ex)
+
+
            
 
-            yag = yagmail.SMTP(imail, ipass)
+            # yag = yagmail.SMTP(imail, ipass)
 
-            head = 'Portfolio'
-            text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
+            # head = 'Portfolio'
+            # text = [trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+totalSaving+","+interest]
 
-            yag.send(remail, head, text)
+            # yag.send(remail, head, text)
+
+
 
         osx,signaly = Signal_Status()
         
