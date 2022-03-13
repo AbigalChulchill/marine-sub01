@@ -573,6 +573,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             print("-OFF- LineNotify Only Real-trade")
             line_notify()
 
+
         else :
             print("LineNotify error by",line)
         print()
