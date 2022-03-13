@@ -335,9 +335,6 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
             except Exception as ex:
                 print ("Something went wrong….",ex)
 
-
-           
-
             # yag = yagmail.SMTP(imail, ipass)
 
             # head = 'Portfolio'
