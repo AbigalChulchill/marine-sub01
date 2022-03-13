@@ -131,7 +131,7 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
         dred = '%.2f'%STOx[-1][1]
 
         # ================================================================
-
+        print("initial Portfolio")
         tx = str(t0700)
         sym = symbolx
         ema = ema_status
@@ -162,7 +162,7 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
             smtp_server.login(gmail_user, gmail_password)
             smtp_server.sendmail(sent_from, to, email_text)
             smtp_server.close()
-            # print ("Email sent successfully!")
+            print("Sending finish")
 
         except Exception as ex:
             print ("Something went wrong….",ex)
