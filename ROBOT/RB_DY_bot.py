@@ -294,6 +294,7 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         
         def fin_port():
 
+            print("sleep befor send final")
             trend = signaly
             date = timex
             symbol = asset_RB
