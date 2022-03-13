@@ -30,6 +30,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
     def int_port():
 
+        print("initial Portfolio")
         now = datetime.today()
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
@@ -75,6 +76,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             smtp_server.login(gmail_user, gmail_password)
             smtp_server.sendmail(sent_from, to, email_text)
             smtp_server.close()
+            print("Sending finish")
         except Exception as ex:
             print ("Something went wrong….",ex)
 
