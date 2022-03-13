@@ -294,21 +294,19 @@ def rebalance_dynamic(api_key,api_secret,token,begin_money,st,asset_RB,low_gap,z
         
         def fin_port():
 
-            print("sleep befor send final")
-            time.sleep(5)
-            trend = signaly
-            date = timex
+            trend = str(signaly)
+            date = str(timex)
             symbol = asset_RB
             ratio = str(coin_per)+"/"+str(usdt_per)
-            price = price_A
+            price = str(price_A)
             market = buysell[0]
-            volBS = value[0]
-            valBS = value[0]
-            final_value = value_AB
-            growth = gro
-            growth_rate = gro_p
-            totalSaving = amounty
-            interest = Interesty
+            volBS = str(value[0])
+            valBS = str(value[0])
+            final_value = str(value_AB)
+            growth = str(gro)
+            growth_rate = str(gro_p)
+            totalSaving = str(amounty)
+            interest = str(Interesty)
 
             gmail_user = imail
             gmail_password = ipass
