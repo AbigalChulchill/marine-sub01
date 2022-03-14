@@ -83,7 +83,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
     def EMA_base():
         
         signal = []
-            
+        print("EMA status")
         if EMAx == "Y":
             timef = emat
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=timef,limit=1000)
@@ -132,7 +132,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         return  signal
 
     def Signal_Status():
-        print()
+        print("SIGNAL STATUS")
         ema_signal = EMA_base()
 
         os = 0
@@ -189,7 +189,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
     def Balancef():
 
-        print("ENTER FINISH")
+        print("IN BALANCE")
         # ประเมิน indicator and status --------------------------------------------------------------------
        
         def line_notify():
