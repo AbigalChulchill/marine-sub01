@@ -16,9 +16,15 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
     
     print("get exchange")
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'enableRateLimit': True})
+    Account_name  = "Robot-Binance"
 
-    # print('apiKey:', ccxt.api_Key)  # slightly edited these lines
-    # print('secret:', ccxt.api_secret)  # slightly edited these lines
+    
+    if Account_name == "" :
+        print("\n""Account Name - This is Main Account",': Broker - ',exchange)     
+    else:
+        print( "\n"'Account Name - ',Account_name,': Broker - ',exchange)
+        exchange.headers = {'Robot-Binance-SUBACCOUNT': Account_name}
+
 
     saving = Client(api_key,api_secret)
 
@@ -95,7 +101,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             print('apiKey:', exchange.apiKey)  # slightly edited these lines
             print('secret:', exchange.secret)  # slightly edited these lines
 
-            ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=emat,limit=None)
+            ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=emat,limit=1000)
             print("EMA CHECK out")
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
             data['datetime']  = pd.to_datetime(data['datetime'], unit='ms')
