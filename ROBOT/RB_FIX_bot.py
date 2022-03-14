@@ -13,7 +13,7 @@ import smtplib
 
 def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st,asset_RB,Balance_fix,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
     
-   
+    print("get exchange")
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'enableRateLimit': True})
     Account_name = "Robot-Binance"
 
@@ -95,6 +95,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         if EMAx == "Y":
             timef = emat
             print("EMA CHECK in")
+            print(exchange)
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=timef,limit=1000)
             print("EMA CHECK out")
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
