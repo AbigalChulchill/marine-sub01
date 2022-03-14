@@ -37,7 +37,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
         timex = time1 +"_"+ time2
 
-        trend = "-"
+        trend = "Signals"
         date = timex
         symbol = asset_RB
         ratio = "-"
