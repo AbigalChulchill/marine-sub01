@@ -35,7 +35,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
-        timex = time1 +" * "+ time2
+        timex = time1 +"_"+ time2
 
         trend = "-"
         date = timex
@@ -59,7 +59,6 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         subject = 'Portfolio'
         body_x = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
 
-
         email_text = """\
         From: %s
         To: %s
@@ -67,7 +66,6 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
         %s
         """ % (sent_from, ", ".join(to), subject, body_x)
-
 
         try:
             smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -82,8 +80,8 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
     def EMA_base():
         
         signal = []
+       
         if EMAx == "Y":
-
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=emat,limit=1000)
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
             data['datetime']  = pd.to_datetime(data['datetime'], unit='ms')
@@ -187,7 +185,6 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
     def Balancef():
 
-        print("IN BALANCE")
         # ประเมิน indicator and status --------------------------------------------------------------------
        
         def line_notify():
@@ -276,7 +273,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
             sent_from = gmail_user
             to = [remail]
-            subject = 'Test'
+            subject = 'Portfolio'
             body = trend+","+date+","+symbol+","+fix+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
 
             email_text = """\
@@ -305,7 +302,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
-        timex = time1 +" *** "+ time2
+        timex = time1 +"_"+ time2
         print("  date   = ",time1,"\n"," time   = ",time2)
 
         # ตรวจสอบจำนวณเหรียญ -----------------------------------------------------------------------
@@ -372,7 +369,6 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
                 except :
                     print("Value market less than 10 usd")
                     
-
         else :
             emo.append(emoji.emojize(":x:", use_aliases=True))
             buysell.append("non")
@@ -526,5 +522,3 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             time.sleep(1)
             when_to_stop -= 1
         print()
-
-        

@@ -13,8 +13,8 @@ import smtplib
 
 def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st,asset_RB,low_gap,zone_1,mid_gap,zone_2,high_gap,zone_3,zone_4,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
 
-    password = ""
-    exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
+    exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'enableRateLimit': True})
+   
     saving = Client(api_key,api_secret)
 
     countdown = (td * 86400)+ (th * 3600) + (tm * 60) + ts
@@ -55,21 +55,21 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
-        timex = time1 +" *** "+ time2
+        timex = time1 +"_"+ time2
 
-        trend = "-----"
+        trend = "="
         date = timex
         symbol = asset_RB
-        ratio = "-----"
-        price = "-----"
-        market = "-----"
-        volBS = "-----"
-        valBS = "-----"
+        ratio = "-"
+        price = "-"
+        market = "-"
+        volBS = "-"
+        valBS = "-"
         final_value = str(begin_money)
-        growth = "-----"
-        growth_rate = "-----"
-        SavingAll = "-----"
-        interest = "-----"
+        growth = "-"
+        growth_rate = "-"
+        SavingAll = "-"
+        interest = "-"
 
         gmail_user = imail
         gmail_password = ipass
@@ -78,7 +78,6 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         to = [remail]
         subject = 'Portfolio'
         body_x = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
-
 
         email_text = """\
         From: %s
@@ -296,7 +295,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
 
             sent_from = gmail_user
             to = [remail]
-            subject = 'Test'
+            subject = 'Portfolio'
             body = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
 
             email_text = """\
@@ -570,11 +569,3 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             time.sleep(1)
             when_to_stop -= 1
         print()
-
-
-
-
-
-
-
-
