@@ -14,15 +14,13 @@ import smtplib
 def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st,asset_RB,Balance_fix,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
     
     print("get exchange")
-    
-    exchange.apiKey = api_key
-    exchange.secret = api_secret
-
-    exchange = ccxt.binance  ({'apiKey' : exchange.apiKey ,'secret' : exchange.secret ,'enableRateLimit': True})
+    exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'enableRateLimit': True})
     Account_name = "Robot-Binance"
 
     
-    
+    exchange.apiKey = 'YOUR_BFX_API_KEY'
+    exchange.secret = 'YOUR_BFX_SECRET'
+
     if Account_name == "" :
         print("\n""Account Name - This is Main Account",': Broker - ',exchange)     
     else:
