@@ -93,6 +93,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             print("EMA CHECK in")
             print('apiKey:', exchange.apiKey)  # slightly edited these lines
             print('secret:', exchange.secret)  # slightly edited these lines
+            
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=emat,limit=None)
             print("EMA CHECK out")
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
