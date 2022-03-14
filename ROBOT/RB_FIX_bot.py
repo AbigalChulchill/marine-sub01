@@ -14,17 +14,7 @@ import smtplib
 
 def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st,asset_RB,Balance_fix,limit_percent,EMAx,emat,sav,asset_saving,savx,savy,line,td,th,tm,ts,domain_name):
     
-    print("get exchange")
     exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'enableRateLimit': True})
-    Account_name  = "Robot-Binance"
-
-    
-    if Account_name == "" :
-        print("\n""Account Name - This is Main Account",': Broker - ',exchange)     
-    else:
-        print( "\n"'Account Name - ',Account_name,': Broker - ',exchange)
-        exchange.headers = {'Robot-Binance-SUBACCOUNT': Account_name}
-
 
     saving = Client(api_key,api_secret)
 
@@ -41,26 +31,25 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
     def int_port():
 
-        print("initial Portfolio")
         now = datetime.today()
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
-        timex = time1 +" *** "+ time2
+        timex = time1 +" * "+ time2
 
-        trend = "-----"
+        trend = "-"
         date = timex
         symbol = asset_RB
-        ratio = "-----"
-        price = "-----"
-        market = "-----"
-        volBS = "-----"
-        valBS = "-----"
+        ratio = "-"
+        price = "-"
+        market = "-"
+        volBS = "-"
+        valBS = "-"
         final_value = str(begin_money)
-        growth = "-----"
-        growth_rate = "-----"
-        SavingAll = "-----"
-        interest = "-----"
+        growth = "-"
+        growth_rate = "-"
+        SavingAll = "-"
+        interest = "-"
 
         gmail_user = imail
         gmail_password = ipass
@@ -68,7 +57,6 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         sent_from = gmail_user
         to = [remail]
         subject = 'Portfolio'
-        # body_x = "trend"+","+"date"+","+"symbol"+","+"ratio"+","+"price"+","+"market"+","+"volBS"+","+"valBS"+","+"final_value"+","+"growth"+","+"growth_rate"+","+"SavingAll"+","+"interest"
         body_x = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
 
 
@@ -94,15 +82,9 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
     def EMA_base():
         
         signal = []
-        print("EMA status")
         if EMAx == "Y":
-            
-            print("EMA CHECK in")
-            print('apiKey:', exchange.apiKey)  # slightly edited these lines
-            print('secret:', exchange.secret)  # slightly edited these lines
 
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=emat,limit=1000)
-            print("EMA CHECK out")
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
             data['datetime']  = pd.to_datetime(data['datetime'], unit='ms')
             data.set_index('datetime', inplace=True)
@@ -144,11 +126,11 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         
         else :
             signal.append("STOPPING")
-        print("FINISH EMA")
+    
         return  signal
 
     def Signal_Status():
-        print("SIGNAL STATUS")
+    
         ema_signal = EMA_base()
 
         os = 0
