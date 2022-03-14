@@ -77,7 +77,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         sent_from = gmail_user
         to = [remail]
         subject = 'Portfolio'
-        body_x = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
+        body_x = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest
 
         email_text = """\
         From: %s
@@ -296,7 +296,8 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             sent_from = gmail_user
             to = [remail]
             subject = 'Portfolio'
-            body = trend+","+date+","+symbol+","+ratio+","+price+","+market+","+volBS+","+valBS+","+final_value+","+growth+","+growth_rate+","+SavingAll+","+interest
+            
+            body = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest
 
             email_text = """\
             From: %s

@@ -11,12 +11,112 @@ import SETTING.var_set as var_set
 import smtplib
 
 
-def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,e4,r,b1,b2,m1,m2,m3,s1,s2,s3,s4,td,th,tm,ts,domain_name):
+def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,e4,r1,b1,b2,m1,m2,m3,s1,s2,s3,s4,td,th,tm,ts,line,rec,domain_name):
 
     countdown = (int(td) * 86400)+ (int(th) * 3600) + (int(tm) * 60) + int(ts)
     
     def track_run():
         
+        def recordx():
+
+            tx = str(t0700)
+
+            e = str(e1) +" / "+ str(e2) +" / "+ str(e3) +" / "+ str(e4)
+            r = str(r1)
+            b = "Length"+str(b1) +" / "+"std"+ str(b2)
+            m = "fast"+str(m1) +" / "+"slow"+str(m2) + " / "+"signal"+str(m3)
+            s = "length"+str(s1) +" / "+"rsi"+str(s2) +" / "+"k"+str(s3) +" / "+"d"+str(s4)
+
+            ema = ema_status
+            rx = str(rsi)
+            bbandx = str(up_per)+" / "+str(low_per)
+            macdx = str(macd)+" / "+str(fast)+" / "+str(slow)
+            stox = str(kblue)+" / "+str(dred)
+            
+            gmail_user = imail
+            gmail_password = ipass
+
+            sent_from = gmail_user
+            to = [remail]
+            subject = 'TRACKER'
+            body_x = tx+" , "+asset_RB+" , "+ema+" , "+rx+" , "+bbandx+" , "+macdx+" , "+stox+" , "+ind_t+" , "+e+" , "+r+" , "+b+" , "+m+" , "+s
+
+            email_text = """\
+            From: %s
+            To: %s
+            Subject: %s
+
+            %s
+            """ % (sent_from, ", ".join(to), subject, body_x)
+
+            try:
+                smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+                smtp_server.ehlo()
+                smtp_server.login(gmail_user, gmail_password)
+                smtp_server.sendmail(sent_from, to, email_text)
+                smtp_server.close()
+                print("Sending finish")
+
+            except Exception as ex:
+                print ("Something went wrong….",ex)
+    
+        def linex():
+
+            messenger = Sendline(token)
+        
+            messenger.sendtext(
+
+                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"DOMAIN     =    "+str(domain_name)+
+                '\n'+emoji.emojize(":wrench:", use_aliases=True)+"SYSTEM     =    "+'ROBOT_TRACKER'+
+
+                '\n\n'+str(utc)+ " ---> " +"UTC"+ 
+
+                '\n\n'+emoji.emojize(":earth_americas:", use_aliases=True)+"Grayscale Bitcoin , MicroStrategy" +
+                '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t00500) + " (-5) " +
+                
+                '\n\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"IT,BE"+
+                '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0100) + " (+1)"+
+                '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"IN"+
+                '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0530) + " (+5:30)"+
+                '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"TH,VNM"+
+                '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0700) + " (+7)"+
+                '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"MY,PH,HK"+
+                '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0800) + " (+8)"+
+                '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"SKR"+
+                '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0900) + " (+9)"+
+
+                '\n\n'+"SYMBOL    =    " + str(symbolx)+
+                '\n'+"TIMEFRAME    =    " + str(ind_t)+
+
+                '\n\n'+"======="+" SETTING "+"======="+
+
+                '\n\n'+"EMA    =    " + str(e1) +" / "+ str(e2) +" / "+ str(e3) +" / "+ str(e4)+
+                '\n'+"RSI    =    " + str(r1)+ 
+                '\n'+"BBAND    =    " +"Length"+str(b1) +" / "+"std"+ str(b2)+
+                '\n'+"MACD    =    " +"fast"+str(m1) +" / "+"slow"+str(m2) + " / "+"signal"+str(m3)+
+                '\n'+"STORSI    =    " +"length"+str(s1) +" / "+"rsi"+str(s2) +" / "+"k"+str(s3) +" / "+"d"+str(s4)+
+
+                '\n\n'+"======="+" NEWS "+"======="+
+
+                '\n\n'+"PRICE SYMBOL    =    " + str(price_A)+ 
+            
+                '\n\n'+"EMA STATUS    =    " + str(ema_status)+ 
+
+                '\n\n'+"RSI STATUS    =    " + str(rsi)+ 
+
+                '\n\n'+"BBAND% UP    =    " + str(up_per) +
+                '\n'+"BBAND% LO    =    " + str(low_per) + 
+
+                '\n\n'+"MACD STATUS    =    " +str(macd)  +
+                '\n'+"FAST STATUS    =    " +str(fast)  +
+                '\n'+"SLOW STATUS    =    " +str(slow)  +
+                
+                '\n\n'+"STO K    =    " +str(kblue)  +
+                '\n'+"STO D    =    " +str(dred)
+
+            )
+        
+        # =========================================================================
         password = ""
         exchange = ccxt.binance  ({'apiKey' : api_key ,'secret' : api_secret ,'password' : password ,'enableRateLimit': True})
         
@@ -59,7 +159,7 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
         nextE = now + relativedelta(hours=int(7),minutes=int(0))
         E1 = str(nextE.day)+"/"+str(nextE.month)+"/"+str(nextE.year)
         E2 = str(nextE.hour)+":"+str(nextE.minute)+":"+str(nextE.second)
-        t0700 = str(E1)+" *** "+str(E2)
+        t0700 = str(E1)+"_"+str(E2)
         
       
         #  Malaysia  Philippines  Hong Kong
@@ -93,27 +193,27 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
 
         EMAx.sort(key=fillin)
 
-        a = str(EMAx[0]["EMA"])
-        b = str(EMAx[1]["EMA"])
-        c = str(EMAx[2]["EMA"])
-        d = str(EMAx[3]["EMA"])
+        x1 = str(EMAx[0]["EMA"])
+        x2 = str(EMAx[1]["EMA"])
+        x3 = str(EMAx[2]["EMA"])
+        x4 = str(EMAx[3]["EMA"])
 
-        ema_status = a + "," + b + "," + c + "," + d
+        ema_status = x1 + "," + x2 + "," + x3 + "," + x4
 
         # ================================================================
-        RSIx = np.array(data.ta.rsi(int(r)))
+        RSIx = np.array(data.ta.rsi(int(r1)))
 
-        rsi = '%.2f'%RSIx[-1]
+        rsi = '%.2f'%RSIx[-1]+"%"
     
         # ================================================================
         BBANDx = np.array(data.ta.bbands(length=int(b1), std=int(b2)))
 
-        u = BBANDx[-1][2]
-        m = BBANDx[-1][1]
-        l = BBANDx[-1][0]
+        up = BBANDx[-1][2]
+        mid = BBANDx[-1][1]
+        lo = BBANDx[-1][0]
 
-        low_per = '%.2f'%(((m - l) * 100 / m))+"%"
-        up_per = '%.2f'%(((u - m) * 100 / m))+"%"
+        low_per = '%.2f'%(((mid - lo) * 100 / mid))+"%"
+        up_per = '%.2f'%(((up - mid) * 100 / mid))+"%"
 
         # ================================================================
 
@@ -131,99 +231,22 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
         dred = '%.2f'%STOx[-1][1]
 
         # ================================================================
-        print("initial Portfolio")
-        tx = str(t0700)
-        sym = symbolx
-        ema = ema_status
-        rx = str(rsi)
-        bbandx = str(up_per)+"/"+str(low_per)
-        macdx = str(macd)+"/"+str(fast)+"/"+str(slow)
-        stox = str(kblue)+"/"+str(dred)
-        
-        gmail_user = imail
-        gmail_password = ipass
 
-        sent_from = gmail_user
-        to = [remail]
-        subject = 'TRACKER'
-        body_x = tx+" , "+sym+" , "+ema+" , "+rx+" , "+bbandx+" , "+macdx+" , "+stox
-
-        email_text = """\
-        From: %s
-        To: %s
-        Subject: %s
-
-        %s
-        """ % (sent_from, ", ".join(to), subject, body_x)
-
-        try:
-            smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-            smtp_server.ehlo()
-            smtp_server.login(gmail_user, gmail_password)
-            smtp_server.sendmail(sent_from, to, email_text)
-            smtp_server.close()
-            print("Sending finish")
-
-        except Exception as ex:
-            print ("Something went wrong….",ex)
-
+        if line == "Y":
+            print("Send Line notify")
+            linex()
+        else :
+            print("--OFF-- Line notification")
 
         # ================================================================
         
-        messenger = Sendline(token)
-      
-        messenger.sendtext(
+        if rec == "Y":
+            print("Send Record")
+            recordx()
+        else :
+            print("--OFF-- Record")
 
-            '\n'+emoji.emojize(":wrench:", use_aliases=True)+"DOMAIN     =    "+str(domain_name)+
-            '\n'+emoji.emojize(":wrench:", use_aliases=True)+"SYSTEM     =    "+'ROBOT_TRACKER'+
-
-            '\n\n'+str(utc)+ " ---> " +"UTC"+ 
-
-            '\n\n'+emoji.emojize(":earth_americas:", use_aliases=True)+"Grayscale Bitcoin , MicroStrategy" +
-            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t00500) + " (-5) " +
-            
-            '\n\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"IT,BE"+
-            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0100) + " (+1)"+
-            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"IN"+
-            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0530) + " (+5:30)"+
-            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"TH,VNM"+
-            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0700) + " (+7)"+
-            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"MY,PH,HK"+
-            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0800) + " (+8)"+
-            '\n'+emoji.emojize(":earth_asia:", use_aliases=True)+"SKR"+
-            '\n'+emoji.emojize(":alarm_clock:", use_aliases=True)+str(t0900) + " (+9)"+
-
-            '\n\n'+"SYMBOL    =    " + str(symbolx)+
-            '\n'+"TIMEFRAME    =    " + str(ind_t)+
-
-            '\n\n'+"======="+" SETTING "+"======="+
-
-            '\n\n'+"EMA    =    " + str(e1) +" / "+ str(e2) +" / "+ str(e3) +" / "+ str(e4)+
-            '\n'+"RSI    =    " + str(r)+ 
-            '\n'+"BBAND    =    " +"Length"+str(b1) +" / "+"std"+ str(b2)+
-            '\n'+"MACD    =    " +"fast"+str(m1) +" / "+"slow"+str(m2) + " / "+"signal"+str(m3)+
-            '\n'+"STORSI    =    " +"length"+str(s1) +" / "+"rsi"+str(s2) +" / "+"k"+str(s3) +" / "+"d"+str(s4)+
-
-            '\n\n'+"======="+" NEWS "+"======="+
-
-            '\n\n'+"PRICE SYMBOL    =    " + str(price_A)+ 
-           
-            '\n\n'+"EMA STATUS    =    " + str(ema_status)+ 
-
-            '\n\n'+"RSI STATUS    =    " + str(rsi)+ 
-
-            '\n\n'+"BBAND% UP    =    " + str(up_per) +
-            '\n'+"BBAND% LO    =    " + str(low_per) + 
-
-            '\n\n'+"MACD STATUS    =    " +str(macd)  +
-            '\n'+"FAST STATUS    =    " +str(fast)  +
-            '\n'+"SLOW STATUS    =    " +str(slow)  +
-            
-            '\n\n'+"STO K    =    " +str(kblue)  +
-            '\n'+"STO D    =    " +str(dred)
-
-            )
-        
+        # ================================================================
         print("END of ROBOT")
 
     while True :
