@@ -27,9 +27,9 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
             m = "fast"+str(m1) +" / "+"slow"+str(m2) + " / "+"signal"+str(m3)
             s = "length"+str(s1) +" / "+"rsi"+str(s2) +" / "+"k"+str(s3) +" / "+"d"+str(s4)
 
-            ema = ema_status
+           
             rx = str(rsi)
-            bbandx = str(up_per)+" / "+str(low_per)
+            bbandx = str(low_per)+" / "+str(up_per)
             macdx = str(macd)+" / "+str(fast)+" / "+str(slow)
             stox = str(kblue)+" / "+str(dred)
             
@@ -39,7 +39,7 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
             sent_from = gmail_user
             to = [remail]
             subject = 'TRACKER'
-            body_x = tx+" , "+asset_RB+" , "+ema+" , "+rx+" , "+bbandx+" , "+macdx+" , "+stox+" , "+ind_t+" , "+e+" , "+r+" , "+b+" , "+m+" , "+s
+            body_x = tx+" , "+asset_RB+" , "+ema_status+" , "+rx+" , "+bbandx+" , "+macdx+" , "+stox+" , "+ind_t+" , "+e+" , "+r+" , "+b+" , "+m+" , "+s
 
             email_text = """\
             From: %s
@@ -198,7 +198,7 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
         x3 = str(EMAx[2]["EMA"])
         x4 = str(EMAx[3]["EMA"])
 
-        ema_status = x1 + "," + x2 + "," + x3 + "," + x4
+        ema_status = x1 + "/" + x2 + "/" + x3 + "/" + x4
 
         # ================================================================
         RSIx = np.array(data.ta.rsi(int(r1)))
@@ -239,7 +239,7 @@ def tracker(api_key,api_secret,token,imail,ipass,remail,asset_RB,ind_t,e1,e2,e3,
             print("--OFF-- Line notification")
 
         # ================================================================
-        
+
         if rec == "Y":
             print("Send Record")
             recordx()
