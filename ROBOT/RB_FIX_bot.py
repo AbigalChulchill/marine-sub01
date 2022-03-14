@@ -86,7 +86,9 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         print("EMA status")
         if EMAx == "Y":
             timef = emat
+            print("EMA CHECK in")
             ohlcv = exchange.fetch_ohlcv(symbol = symbolx,timeframe=timef,limit=1000)
+            print("EMA CHECK out")
             data = pd.DataFrame(ohlcv, columns =['datetime', 'open','high','low','close','volume'])
             data['datetime']  = pd.to_datetime(data['datetime'], unit='ms')
             data.set_index('datetime', inplace=True)
