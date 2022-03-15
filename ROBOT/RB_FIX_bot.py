@@ -251,7 +251,10 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             
             elif asset_saving == 'USDT' :
                 val_saving = amounty
-            
+
+            else :
+                val_saving = 0.00
+
             return val_saving
         
         def fin_port():

@@ -65,11 +65,13 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         market = "-"
         volBS = "-"
         valBS = "-"
-        final_value = str(begin_money)
+        final_value = "-"
         growth = "-"
         growth_rate = "-"
         SavingAll = "-"
         interest = "-"
+        rb_type = "RATIO"
+        begin_m = str(begin_money)
 
         gmail_user = imail
         gmail_password = ipass
@@ -77,7 +79,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         sent_from = gmail_user
         to = [remail]
         subject = 'Portfolio'
-        body_x = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest
+        body_x = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest+" , "+rb_type+" , "+begin_m
 
         email_text = """\
         From: %s
@@ -271,6 +273,9 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             
             elif asset_saving == 'USDT' :
                 val_saving = amounty
+
+            else :
+                val_saving = 0.00
             
             return val_saving
         
