@@ -7,7 +7,6 @@ import emoji
 from songline import Sendline
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-import SETTING.var_set as var_set
 import smtplib
 
 

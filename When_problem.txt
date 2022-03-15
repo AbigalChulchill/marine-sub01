@@ -56,4 +56,16 @@ git remote set-url main --push --add https://github.com/harith11000/marine-sub01
 
 *****  การอนุญาติอุปกรณภายนอกเชื่อมต่อ กับ gmail จะตัดอัตโนมัติประมาณ เดือน พฤษภาคม เราต้องกลับไป เปิดใหม่
 
-ccxt==1.60.86
+เมื่อมีการสร้าง e-mail ใหม่ต้องตั้งค่าตามนี้
+*** สร้างเมล์ สำหรับส่ง
+1.ตั้งค่า IMAP https://mail.google.com/mail/u/0/?tab=km#settings/fwdandpop
+2.เปิดการยืนยัน 2 ขั้นตอน https://myaccount.google.com/security
+3.สร้างรหัสผ่าน แอป https://myaccount.google.com/security
+4.ปิดการรับ โฆษณา https://adssettings.google.com/authenticated?hl=th&ref=my-account
+
+*** สร้างเมล์ สำหรับรับ
+1.ตั้งค่า IMAP https://mail.google.com/mail/u/0/?tab=km#settings/fwdandpop
+2.ปิดการรับ โฆษณา https://adssettings.google.com/authenticated?hl=th&ref=my-account
+3.เปิดการ้ข่าถึงแอปปลอดภัยน้อย https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4PjL1XMsOrUhPVlAjXRYEBLd6bg0MHuGwvhNdo-njVEfQZkCTHD-78wW3tEtExj0PcvUdVIcTT5uqASnrpLyquE0l0Y2Q
+
+ตั้งค่าบัญชี อีเมล์ https://myactivity.google.com/activitycontrols?settings=youtube&utm_source=privacycheckup&hl=th
