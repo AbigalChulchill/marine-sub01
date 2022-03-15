@@ -45,11 +45,13 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         market = "-"
         volBS = "-"
         valBS = "-"
-        final_value = str(begin_money)
+        final_value = "-"
         growth = "-"
         growth_rate = "-"
         SavingAll = "-"
         interest = "-"
+        rb_type = "FIX"
+        begin_m = str(begin_money)
 
         gmail_user = imail
         gmail_password = ipass
@@ -57,7 +59,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         sent_from = gmail_user
         to = [remail]
         subject = 'Portfolio'
-        body_x = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest
+        body_x = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest+" , "+rb_type+" , "+begin_m
 
         email_text = """\
         From: %s
@@ -267,6 +269,8 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             growth_rate = str(gro_p)
             SavingAll = str(amounty)
             interest = str(Interesty)
+            rb_type = "FIX"
+            begin_m = str(begin_money)
 
             gmail_user = imail
             gmail_password = ipass
@@ -274,7 +278,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             sent_from = gmail_user
             to = [remail]
             subject = 'Portfolio'
-            body = trend+","+date+" , "+symbol+" , "+fix+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest
+            body = trend+","+date+" , "+symbol+" , "+fix+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest+" , "+rb_type+" , "+begin_m
 
             email_text = """\
             From: %s
