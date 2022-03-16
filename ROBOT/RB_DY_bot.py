@@ -442,7 +442,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             
             vol_G = float(savy)
 
-            vol_GP = float( savy * begin_money / 100 )
+            vol_GP =  float(savy) * float(begin_money) / 100 
             
         elif asset_saving != "USDT" :
             #ราคาเหรียญ
@@ -450,9 +450,9 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             price_sav  = exchange.fetch_ticker(sym_sav)   
             pri_sav = price_sav ['last'] 
             
-            vol_G = float( savy / pri_sav)
+            vol_G = float(savy) / float(pri_sav)
 
-            vol_GPx = float( savy * begin_money / 100 )
+            vol_GPx = float(savy) * float(begin_money) / 100 
             vol_GP = float( vol_GPx / pri_sav )
            
 
