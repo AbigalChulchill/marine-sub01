@@ -109,7 +109,7 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
         '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Asset       =    "+str(sym)+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" coin"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Vol.  =    "+str(tvo)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Vol.  =    "+str(tvo)+" coin"+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Val.  =    "+str(tvax)+" USDT"+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Interest    =    "+str(ti)+" USDT")
 
@@ -138,14 +138,16 @@ def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
     val_red = volume * pri_sav 
 
     try :
-        print("Redeem now")
+        print("Redeem")
+        print(product," ",volume,"  ",type(product)," ",type(volume))
+        
         log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
 
         messenger.sendtext(
             '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Domain       =    "+str(domain_name)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Date      =    "+str(timex)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Asset_Redeem       =    "+str(sym)+
-            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Vol.  =    "+str(vol_red)+" USDT"+
+            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Vol.  =    "+str(vol_red)+" coin"+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Val.  =    "+str(val_red)+" USDT")
    
     except :
