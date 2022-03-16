@@ -1,5 +1,5 @@
 from flask import Flask , request
-from ROBOT.BALANCE_bot import total_spot , total_sym , saving_sym
+from ROBOT.BALANCE_bot import total_spot , total_sym , saving_sym , saving_redeem
 from ROBOT.RB_DY_bot import rebalance_dynamic
 from ROBOT.RB_FIX_bot import rebalance_fix
 from ROBOT.TRACKER_bot import tracker
@@ -21,6 +21,10 @@ class GOTO_ROBOT(threading.Thread):
 
     def sav_sym(self,x,y,z,A1,dm):
         saving_sym(x,y,z,A1,dm)
+    
+    def sav_red(self,x,y,z,A1,A2,dm):
+        saving_redeem(x,y,z,A1,A2,dm)
+
 
 
 
@@ -65,6 +69,13 @@ def rebalance(ENTER,x,y,z,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
         text = "S_SYM"
         print("(",str(setting.domain_name),")"," ",text)
         GR.sav_sym(x,y,z,A1,dm)
+
+    elif ENTER == "S_RED" :
+
+        text = "S_RED" 
+        print("(",str(setting.domain_name),")"," ",text)
+        GR.sav_red(x,y,z,A1,A2,dm)
+
     
     #---------------------------------------------------------------------------------------------
 

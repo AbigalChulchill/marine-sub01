@@ -1,5 +1,7 @@
 import emoji
 import ccxt
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 from songline import Sendline
 from binance import Client
 
@@ -84,18 +86,75 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
 
 
     today_sav = float(data_in[0]['todayPurchasedAmount'])       #วันนี้ฝากไปเท่าไหร่
-    total_sav = float(data_in[0]['totalAmount'])                   #จำนวนเหรียญฝากทั้งหมด
+    total_vol = float(data_in[0]['totalAmount'])                   #จำนวนเหรียญฝากทั้งหมด
     total_inter = float(data_in[0]['totalInterest'])               #ดอกเบี้ยสะสม
 
     messenger = Sendline(token)
+
+    sym_sav = sym+"/"+'USDT' #pair_trade
+    exchange = ccxt.binance ({'apiKey' : api_key ,'secret' : api_secret  ,'enableRateLimit': True})
+
+    price_sav  = exchange.fetch_ticker(sym_sav)   
+    pri_sav = price_sav ['last'] 
+
+    tvo = '%.4f'%total_vol
+    
+    tva = total_vol * pri_sav
+    tvax = '%.4f'%tva
+    ti = '%.4f'%total_inter
+
+
     messenger.sendtext(
 
         '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Asset       =    "+str(sym)+
         '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" coin"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_inter  =    "+str(total_sav)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Value    =    "+str(total_inter)+" USDT")
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Vol.  =    "+str(tvo)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Val.  =    "+str(tvax)+" USDT"+
+        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Interest    =    "+str(ti)+" USDT")
 
+def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
+    
+    exchange = ccxt.binance ({'apiKey' : api_key ,'secret' : api_secret  ,'enableRateLimit': True})
+    log = Client(api_key,api_secret)
+    messenger = Sendline(token)
+
+    now = datetime.today()
+    local = now + relativedelta(hours=int(7),minutes=int(0))
+    time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
+    time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
+    timex = time1 +" *** "+ time2
+
+    sym = asset.upper()
+
+    sym_sav = sym+"/"+'USDT' #pair_trade
+    price_sav  = exchange.fetch_ticker(sym_sav)   
+    pri_sav = price_sav ['last'] 
+    
+    product = sym +"/"+'001'
+    volume = float(vol)
+
+    vol_red = '%.4f'%volume
+    val_red = volume * pri_sav 
+
+    try :
+        print("Redeem now")
+        log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
+
+        messenger.sendtext(
+            '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Domain       =    "+str(domain_name)+
+            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Date      =    "+str(timex)+
+            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Asset_Redeem       =    "+str(sym)+
+            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Vol.  =    "+str(vol_red)+" USDT"+
+            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Val.  =    "+str(val_red)+" USDT")
+   
+    except :
+
+        print("Error by Redeem")
+        messenger.sendtext(
+
+            '\n\n'+(emoji.emojize(":bell:", use_aliases=True)*2)+" Something error while Redeem "+(emoji.emojize(":bell:", use_aliases=True)*2))
+            
 
     
 
