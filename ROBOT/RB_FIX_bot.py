@@ -438,8 +438,8 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
     
         fi_saving = saving.get_lending_position(asset = asset_saving)
         try :
-            amounty = str(fi_saving[0]['totalAmount'])
-            Interesty = str(fi_saving[0]['totalInterest'])
+            amounty = fi_saving[0]['totalAmount']
+            Interesty = fi_saving[0]['totalInterest']
         except :
             amounty = 0.00
             Interesty = 0.00
@@ -448,7 +448,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
         # หามูลค่า ของเหรียญที่ savใน port เฉพาะเหรียญที่เหลือก
         if asset_saving == "USDT" :
-            val_savin = amounty
+            val_savin = float(amounty)
 
         elif asset_saving != "USDT" :
 
@@ -456,7 +456,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             price_s  = exchange.fetch_ticker(sym_s)   
             pri_s = price_s ['last'] 
 
-            val_savin = amounty * pri_s
+            val_savin = float(amounty) * float(pri_s)
         
         growth = growthx + float(val_savin)
         growth_per =( float(growth) * 100 )  / float(begin_money)
