@@ -414,7 +414,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             vol_GP = float( vol_GPx / pri_sav )
            
 
-        product = asset_saving +"/"+'001'
+        product = asset_saving + '001'
 
         if sav == "Y":
 

@@ -456,7 +456,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             vol_GP = float( vol_GPx / pri_sav )
            
 
-        product = asset_saving +"/"+'001'
+        product = asset_saving + '001'
 
         if sav == "Y":
 

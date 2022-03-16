@@ -131,7 +131,7 @@ def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
     price_sav  = exchange.fetch_ticker(sym_sav)   
     pri_sav = price_sav ['last'] 
     
-    product = sym +"/"+'001'
+    product = sym+'001'
     volume = float(vol)
 
     vol_red = '%.4f'%volume
@@ -139,7 +139,6 @@ def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
 
     try :
         print("Redeem")
-        print(product," ",volume,"  ",type(product)," ",type(volume))
         
         log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
 
