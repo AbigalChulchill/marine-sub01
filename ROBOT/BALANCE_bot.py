@@ -69,14 +69,14 @@ def total_sym(api_key,api_secret,token,asset,domain_name):
     messenger = Sendline(token)
     messenger.sendtext(
 
-        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain   =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+str(sym)+"    =    "+str('%.4f'%Volume_A)+" coin"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Vol."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" coin"+
+        '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Domain   =    "+str(domain_name)+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Vol."+str(sym)+"    =    "+str('%.4f'%Volume_A)+" coin"+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Vol."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" coin"+
 
-        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Val."+str(sym)+"    =    "+str('%.4f'%val)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Val."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" USDT"+
+        '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Val."+str(sym)+"    =    "+str('%.4f'%val)+" USDT"+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Val."+"USDT"+"    =    "+str('%.4f'%Volume_B)+" USDT"+
 
-        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Sum_Value"+"    =    "+str('%.4f'%total_pair)+" USDT")
+        '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Sum_Value"+"    =    "+str('%.4f'%total_pair)+" USDT")
 
 def saving_sym(api_key,api_secret,token,asset,domain_name):
    
@@ -106,12 +106,12 @@ def saving_sym(api_key,api_secret,token,asset,domain_name):
 
     messenger.sendtext(
 
-        '\n\n'+emoji.emojize(":wrench:", use_aliases=True)+"Domain       =    "+str(domain_name)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Asset       =    "+str(sym)+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" coin"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Vol.  =    "+str(tvo)+" coin"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Val.  =    "+str(tvax)+" USDT"+
-        '\n'+emoji.emojize(":wrench:", use_aliases=True)+"Total_Interest    =    "+str(ti)+" USDT")
+        '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Domain       =    "+str(domain_name)+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Asset       =    "+str(sym)+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Today_sav    =    "+str(today_sav)+" coin"+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Total_Vol.  =    "+str(tvo)+" coin"+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Total_Val.  =    "+str(tvax)+" USDT"+
+        '\n'+emoji.emojize(":bell:", use_aliases=True)+"Total_Interest    =    "+str(ti)+" USDT")
 
 def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
     
@@ -140,12 +140,14 @@ def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
     try :
         print("Redeem")
         
-        log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
+        redeem_id = log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
+        print(redeem_id)
 
         messenger.sendtext(
             '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Domain       =    "+str(domain_name)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Date      =    "+str(timex)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Asset_Redeem       =    "+str(sym)+
+            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_ID      =    "+str(redeem_id)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Vol.  =    "+str(vol_red)+" coin"+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Val.  =    "+str(val_red)+" USDT")
    
