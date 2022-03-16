@@ -439,7 +439,10 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         
         #จำนวนเหรียญ
         if asset_saving == "USDT" :
-            vol_sav = float(growthx)
+            
+            vol_G = float(savy)
+
+            vol_GP = float( savy * begin_money / 100 )
             
         elif asset_saving != "USDT" :
             #ราคาเหรียญ
@@ -447,25 +450,29 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             price_sav  = exchange.fetch_ticker(sym_sav)   
             pri_sav = price_sav ['last'] 
             
-            vol_sav = float(growthx / pri_sav)
+            vol_G = float( savy / pri_sav)
+
+            vol_GPx = float( savy * begin_money / 100 )
+            vol_GP = float( vol_GPx / pri_sav )
+           
 
         product = asset_saving +"/"+'001'
 
         if sav == "Y":
 
             if savx == "G":
-                if growthx > float(savy):           # ฝากทั้งหมดเมื่อจับสัญญานได้
+                if growthx > float(savy):           # ฝากเท่ากับ savy เมื่อจับสัญญานได้
                     try :
-                        saving.purchase_lending_product(productId = product, amount = vol_sav)
+                        saving.purchase_lending_product(productId = product, amount = vol_G )
                     except :
                         print("Can't saving")
                 else :
                     print("-OFF- SAVING Less than value config = ",'%.2f'%growthx," USDT")
 
             elif savx == "GP":
-                if growth_perx > float(savy):           # ฝากทั้งหมดเมื่อจับสัญญานได้
+                if growth_perx > float(savy):           # ฝากเท่ากับ savy %  ของbeginmoney  เมื่อจับสัญญานได้
                     try :
-                        saving.purchase_lending_product(productId = product, amount = vol_sav)
+                        saving.purchase_lending_product(productId = product, amount = vol_GP  )
                     except :
                         print("Can't saving")
                 else :
@@ -476,6 +483,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
 
         else:
             print("-OFF- SAVING")
+
 
         # final saving------------------------------------------------------------------------
     
