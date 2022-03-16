@@ -60,7 +60,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         sent_from = gmail_user
         to = [remail]
         subject = 'Portfolio'
-        body_x = sig+","+d+" , "+symbol+" , "+bal+" , "+pri+" , "+mak+" , "+volbs+" , "+valbs+" , "+fin+" , "+g+" , "+gp+" , "+sav+" , "+inter+" , "+type+" , "+begin+" , "+sym_sav
+        body_x = sig+" , "+d+" , "+symbol+" , "+bal+" , "+pri+" , "+mak+" , "+volbs+" , "+valbs+" , "+fin+" , "+g+" , "+gp+" , "+sav+" , "+inter+" , "+type+" , "+begin+" , "+sym_sav
 
         email_text = """\
         From: %s
@@ -267,7 +267,8 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             sent_from = gmail_user
             to = [remail]
             subject = 'Portfolio'
-            body = sig+","+d+" , "+symbol+" , "+bal+" , "+pri+" , "+mak+" , "+volbs+" , "+valbs+" , "+fin+" , "+g+" , "+gp+" , "+sav+" , "+inter+" , "+type+" , "+begin+" , "+sym_sav
+            
+            body = sig+" , "+d+" , "+symbol+" , "+bal+" , "+pri+" , "+mak+" , "+volbs+" , "+valbs+" , "+fin+" , "+g+" , "+gp+" , "+sav+" , "+inter+" , "+type+" , "+begin+" , "+sym_sav
 
             email_text = """\
             From: %s
@@ -406,7 +407,6 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             
             vol_sav = float(growthx / pri_sav)
            
-
         product = asset_saving +"/"+'001'
 
         if sav == "Y":
@@ -479,6 +479,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
                 print("-OFF- portfolio less than 10")
 
         elif rec == "N" :
+
             print("-OFF- portfolio Only Real-trade")
             fin_port() 
 
