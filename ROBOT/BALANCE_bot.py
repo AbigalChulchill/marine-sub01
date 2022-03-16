@@ -135,7 +135,8 @@ def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
     volume = float(vol)
 
     vol_red = '%.4f'%volume
-    val_red = volume * pri_sav 
+    var = volume * pri_sav 
+    val_red = '%.4f'%var
 
     try :
         print("Redeem")
