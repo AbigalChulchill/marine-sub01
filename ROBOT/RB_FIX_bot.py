@@ -445,6 +445,8 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         except :
             amo = 0.00
             Inter = 0.00
+        
+        print(amo,"  ",Inter)
 
         # คำนวน growth + saving (ผลรวม) ------------------------------------------------------------------------
 
