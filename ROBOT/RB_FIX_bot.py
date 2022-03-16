@@ -37,21 +37,22 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
         timex = time1 +"_"+ time2
 
-        trend = "Signals"
-        date = timex
+        sig = "Signals"
+        d = str(timex)
         symbol = asset_RB
-        ratio = "-"
-        price = "-"
-        market = "-"
-        volBS = "-"
-        valBS = "-"
-        final_value = "-"
-        growth = "-"
-        growth_rate = "-"
-        SavingAll = "-"
-        interest = "-"
-        rb_type = "FIX"
-        begin_m = str(begin_money)
+        bal =  "-"
+        pri = "-"
+        mak = "-"
+        volbs = "-"
+        valbs = "-"
+        fin = "-"
+        g = "-"
+        gp = "-"
+        sav = "-"
+        inter = "-"
+        type = "FIX"
+        begin = str(begin_money)
+        sym_sav = str(asset_saving)
 
         gmail_user = imail
         gmail_password = ipass
@@ -59,7 +60,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         sent_from = gmail_user
         to = [remail]
         subject = 'Portfolio'
-        body_x = trend+" , "+date+" , "+symbol+" , "+ratio+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest+" , "+rb_type+" , "+begin_m
+        body_x = sig+","+d+" , "+symbol+" , "+bal+" , "+pri+" , "+mak+" , "+volbs+" , "+valbs+" , "+fin+" , "+g+" , "+gp+" , "+sav+" , "+inter+" , "+type+" , "+begin+" , "+sym_sav
 
         email_text = """\
         From: %s
@@ -240,40 +241,24 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
                 )
 
-        def val_sav():
-            if asset_saving == asset_RB :
-                val_saving = amounty * price_AA
-
-            elif asset_saving != asset_RB :
-                price  = exchange.fetch_ticker(symbolx)   
-                price_sav = (price ['bid'] + price ['ask'] )/2
-                val_saving = amounty * price_sav
-            
-            elif asset_saving == 'USDT' :
-                val_saving = amounty
-
-            else :
-                val_saving = 0.00
-
-            return val_saving
-        
         def fin_port():
 
-            trend = str(signaly)
-            date = str(timex)
+            sig = str(signaly)
+            d = str(timex)
             symbol = asset_RB
-            fix = str(Balance_fix)
-            price = str('%.4f'%price_A)
-            market = buysell[0]
-            volBS = str('%.4f'%volume[0])
-            valBS = str('%.4f'%value[0])
-            final_value = str('%.4f'%value_AB)
-            growth = str(gro)
-            growth_rate = str(gro_p)
-            SavingAll = str(amounty)
-            interest = str(Interesty)
-            rb_type = "FIX"
-            begin_m = str(begin_money)
+            bal = str(Balance_fix)
+            pri = str('%.4f'%price_A)
+            mak = buysell[0]
+            volbs = str('%.4f'%volume[0])
+            valbs = str('%.4f'%value[0])
+            fin = str('%.4f'%value_AB)
+            g = str(gro)
+            gp = str(gro_p)
+            sav = str(val_savin)
+            inter = str(Interesty)
+            type = "FIX"
+            begin = str(begin_money)
+            sym_sav = str(asset_saving)
 
             gmail_user = imail
             gmail_password = ipass
@@ -281,7 +266,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             sent_from = gmail_user
             to = [remail]
             subject = 'Portfolio'
-            body = trend+","+date+" , "+symbol+" , "+fix+" , "+price+" , "+market+" , "+volBS+" , "+valBS+" , "+final_value+" , "+growth+" , "+growth_rate+" , "+SavingAll+" , "+interest+" , "+rb_type+" , "+begin_m
+            body = sig+","+d+" , "+symbol+" , "+bal+" , "+pri+" , "+mak+" , "+volbs+" , "+valbs+" , "+fin+" , "+g+" , "+gp+" , "+sav+" , "+inter+" , "+type+" , "+begin+" , "+sym_sav
 
             email_text = """\
             From: %s
@@ -403,11 +388,24 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         # ดึงเฉพาะ สถานะ initial & buy มาคำนวณ nav -------------------------------------------------
         # คำนวน growth + saving -------------------------------------------------------------------
 
-        growthx = value_AB - float(begin_money)
-        growth_perx = ( float(growthx) * 100 / float(begin_money) )
+        growthx = float(value_AB) - float(begin_money)                      # ตรวจ value ... มูลค่าใน port เพิ่มขึ้น กี่ USDT
+        growth_perx = ( float(growthx) * 100 / float(begin_money) )         # ตรวจ value เพืามกี่ % ... USDT ที่เพื่มขึ้นใน พอท คิดเป็นกี่ % ของ begin money
     
         # Auto saving------------------------------------------------------------------------
         
+        #จำนวนเหรียญ
+        if asset_saving == "USDT" :
+            vol_sav = float(growthx)
+            
+        elif asset_saving != "USDT" :
+            #ราคาเหรียญ
+            sym_sav = asset_saving+"/"+'USDT' #pair_trade
+            price_sav  = exchange.fetch_ticker(sym_sav)   
+            pri_sav = price_sav ['last'] 
+            
+            vol_sav = float(growthx / pri_sav)
+           
+
         product = asset_saving +"/"+'001'
 
         if sav == "Y":
@@ -415,20 +413,20 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             if savx == "G":
                 if growthx > float(savy):           # ฝากทั้งหมดเมื่อจับสัญญานได้
                     try :
-                        exchange.purchase_lending_product(productId = product, amount = float(savy))
+                        saving.purchase_lending_product(productId = product, amount = vol_sav )
                     except :
                         print("Can't saving")
                 else :
-                    print("-OFF- SAVING Less than value config")
+                    print("-OFF- SAVING Less than value config = ",'%.2f'%growthx," USDT")
 
             elif savx == "GP":
                 if growth_perx > float(savy):           # ฝากทั้งหมดเมื่อจับสัญญานได้
                     try :
-                        exchange.purchase_lending_product(productId = product, amount = float(savy))
+                        saving.purchase_lending_product(productId = product, amount = vol_sav )
                     except :
                         print("Can't saving")
                 else :
-                    print("-OFF- SAVING Less than value config")
+                    print("-OFF- SAVING Less than value config  = ",'%.2f'%growth_perx,"%")
 
             else :
                 print("value savx error")
@@ -436,7 +434,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         else:
             print("-OFF- SAVING")
 
-        # final saving------------------------------------------------------------------------
+        # ตรวจสอบ final saving---------------------------------------------------------------------
     
         fi_saving = saving.get_lending_position(asset = asset_saving)
         try :
@@ -446,11 +444,21 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             amounty = 0.00
             Interesty = 0.00
 
-        # คำนวน growth + saving ------------------------------------------------------------------------
+        # คำนวน growth + saving (ผลรวม) ------------------------------------------------------------------------
 
-        value_saving = val_sav()
+        # หามูลค่า ของเหรียญที่ savใน port เฉพาะเหรียญที่เหลือก
+        if asset_saving == "USDT" :
+            val_savin = amounty
+
+        elif asset_saving != "USDT" :
+
+            sym_s = asset_saving+"/"+'USDT' #pair_trade
+            price_s  = exchange.fetch_ticker(sym_s)   
+            pri_s = price_s ['last'] 
+
+            val_savin = amounty * pri_s
         
-        growth = float(value_AB) - float(begin_money) + value_saving
+        growth = growthx + float(val_savin)
         growth_per =( float(growth) * 100 )  / float(begin_money)
         gro = '%.2f'%growth
         gro_p = '%.2f'%growth_per
