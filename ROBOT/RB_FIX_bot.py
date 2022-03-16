@@ -232,7 +232,8 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
 
                 '\n\n'+(emoji.emojize(":moneybag:", use_aliases=True)*2)+'for fix '+str(Balance_fix)+' '+'USDT'+(emoji.emojize(":moneybag:", use_aliases=True)*2) +
 
-                '\n\n'+emoji.emojize(":blue_book:", use_aliases=True)+'All Saving  = '+str(amounty)+
+                '\n\n'+emoji.emojize(":blue_book:", use_aliases=True)+'Asset_Sav  = '+str(asset_saving)+
+                '\n'+emoji.emojize(":blue_book:", use_aliases=True)+'Value_Sav  = '+str(asset_sav)+
                 '\n'+emoji.emojize(":blue_book:", use_aliases=True)+'Interest  = '+str(Interesty)+
 
                 '\n\n'+emoji.emojize(":moneybag:", use_aliases=True)+'BeginMoney  = '+str(begin_money)+' USDT' +
@@ -254,7 +255,7 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             fin = str('%.4f'%value_AB)
             g = str(gro)
             gp = str(gro_p)
-            sav = str(val_savin)
+            sav = str(asset_sav)
             inter = str(Interesty)
             type = "FIX"
             begin = str(begin_money)
@@ -441,18 +442,16 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             amo = fi_saving[0]['totalAmount']
             Inter = fi_saving[0]['totalInterest']
 
-            amounty = float('%.2f'%amo)
-            Interesty = float('%.2f'%Inter)
-
         except :
-            amounty = 0.00
-            Interesty = 0.00
+            amo = 0.00
+            Inter = 0.00
 
         # คำนวน growth + saving (ผลรวม) ------------------------------------------------------------------------
 
         # หามูลค่า ของเหรียญที่ savใน port เฉพาะเหรียญที่เหลือก
         if asset_saving == "USDT" :
-            val_savin = float(amounty)
+            
+            val_savin = float(amo)
 
         elif asset_saving != "USDT" :
 
@@ -460,13 +459,16 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             price_s  = exchange.fetch_ticker(sym_s)   
             pri_s = price_s ['last'] 
 
-            val_savin = float(amounty) * float(pri_s)
+            val_savin = float(amo) * float(pri_s)
         
         growth = growthx + float(val_savin)
         growth_per =( float(growth) * 100 )  / float(begin_money)
         gro = '%.2f'%growth
         gro_p = '%.2f'%growth_per
-        
+
+        asset_sav = '%.2f'%val_savin
+        Interesty = '%.2f'%Inter
+
         # ส่งข้อมูลไปเก็บยัง port------------------------------------------------------------------
         
         if  rec == "Y" :
