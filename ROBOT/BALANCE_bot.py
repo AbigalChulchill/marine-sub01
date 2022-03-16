@@ -141,14 +141,12 @@ def saving_redeem(api_key,api_secret,token,asset,vol,domain_name):
     try :
         print("Redeem")
         
-        redeem_id = log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
-        print(redeem_id)
+        log.redeem_lending_product(productId = product , amount = volume, type = 'NORMAL')
 
         messenger.sendtext(
             '\n\n'+emoji.emojize(":bell:", use_aliases=True)+"Domain       =    "+str(domain_name)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Date      =    "+str(timex)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Asset_Redeem       =    "+str(sym)+
-            '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_ID      =    "+str(redeem_id)+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Vol.  =    "+str(vol_red)+" coin"+
             '\n'+emoji.emojize(":bell:", use_aliases=True)+"Redeem_Val.  =    "+str(val_red)+" USDT")
    
