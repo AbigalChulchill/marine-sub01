@@ -100,7 +100,6 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         except Exception as ex:
             print ("Something went wrong….",ex)
 
-
     def EMA_base():
         
         signal = []
@@ -279,7 +278,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
             gp = str(gro_p)
             sav = str(asset_sav)
             inter = str(Interesty)
-            type = "FIX"
+            type = "RATIO"
             begin = str(begin_money)
             sym_sav = str(asset_saving)
 
@@ -318,7 +317,7 @@ def rebalance_dynamic(api_key,api_secret,token,imail,ipass,remail,rec,begin_mone
         local = now + relativedelta(hours=int(7),minutes=int(0))
         time1 = str(local.day)+"/"+str(local.month)+"/"+str(local.year)
         time2 = str(local.hour)+":"+str(local.minute)+":"+str(local.second)
-        timex = time1 +" *** "+ time2
+        timex = time1 +"_"+ time2
         print("  date   = ",time1,"\n"," time   = ",time2)
 
         # ตรวจสอบจำนวณเหรียญ -----------------------------------------------------------------------
