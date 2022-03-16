@@ -438,8 +438,12 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
     
         fi_saving = saving.get_lending_position(asset = asset_saving)
         try :
-            amounty = float('%.2f'%fi_saving[0]['totalAmount'])
-            Interesty = float('%.2f'%fi_saving[0]['totalInterest'])
+            amo = fi_saving[0]['totalAmount']
+            Inter = fi_saving[0]['totalInterest']
+
+            amounty = float('%.2f'%amo)
+            Interesty = float('%.2f'%Inter)
+
         except :
             amounty = 0.00
             Interesty = 0.00
