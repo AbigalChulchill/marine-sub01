@@ -440,18 +440,18 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
         fi_saving = saving.get_lending_position(asset = asset_saving)
         try :
             amo = float(fi_saving[0]['totalAmount'])
-            Inter = float(fi_saving[0]['totalInterest'])
+            inter = float(fi_saving[0]['totalInterest'])
 
         except :
             amo = 0.00
-            Inter = 0.00
+            inter = 0.00
 
         # คำนวน growth + saving (ผลรวม) ------------------------------------------------------------------------
 
         # หามูลค่า ของเหรียญที่ savใน port เฉพาะเหรียญที่เหลือก
         if asset_saving == "USDT" :
             
-            val_savin = amo
+            asset_savin = amo
 
         elif asset_saving != "USDT" :
 
@@ -459,15 +459,15 @@ def rebalance_fix(api_key,api_secret,token,imail,ipass,remail,rec,begin_money,st
             price_s  = exchange.fetch_ticker(sym_s)   
             pri_s = price_s ['last'] 
 
-            val_savin = amo * float(pri_s)
+            asset_savin = amo * float(pri_s)
         
-        growth = growthx + float(val_savin)
+        growth = growthx + float(asset_savin) + float(inter)
         growth_per =( float(growth) * 100 )  / float(begin_money)
         gro = '%.2f'%growth
         gro_p = '%.2f'%growth_per
 
-        asset_sav = '%.2f'%val_savin
-        Interesty = '%.2f'%Inter
+        asset_sav = '%.2f'%asset_savin
+        Interesty = '%.2f'%inter
 
         # ส่งข้อมูลไปเก็บยัง port------------------------------------------------------------------
         
